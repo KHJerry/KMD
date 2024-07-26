@@ -1,0 +1,91 @@
+{
+	"kind" : "toolchains",
+	"toolchains" : 
+	[
+		{
+			"compiler" : 
+			{
+				"id" : "GNU",
+				"implicit" : {},
+				"path" : "D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/bin/riscv-none-embed-gcc.exe",
+				"version" : ""
+			},
+			"language" : "ASM",
+			"sourceFileExtensions" : 
+			[
+				"s",
+				"S",
+				"asm"
+			]
+		},
+		{
+			"compiler" : 
+			{
+				"id" : "GNU",
+				"implicit" : 
+				{
+					"includeDirectories" : 
+					[
+						"D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/lib/gcc/riscv-none-embed/8.2.0/include",
+						"D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/lib/gcc/riscv-none-embed/8.2.0/include-fixed",
+						"D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/include"
+					],
+					"linkDirectories" : [],
+					"linkFrameworkDirectories" : [],
+					"linkLibraries" : []
+				},
+				"path" : "D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/bin/riscv-none-embed-gcc.exe",
+				"version" : "8.2.0"
+			},
+			"language" : "C",
+			"sourceFileExtensions" : 
+			[
+				"c",
+				"m"
+			]
+		},
+		{
+			"compiler" : 
+			{
+				"id" : "GNU",
+				"implicit" : 
+				{
+					"includeDirectories" : 
+					[
+						"D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/include/c++/8.2.0",
+						"D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/include/c++/8.2.0/riscv-none-embed/rv32imac/ilp32",
+						"D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/include/c++/8.2.0/backward",
+						"D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/lib/gcc/riscv-none-embed/8.2.0/include",
+						"D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/lib/gcc/riscv-none-embed/8.2.0/include-fixed",
+						"D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/include"
+					],
+					"linkDirectories" : [],
+					"linkFrameworkDirectories" : [],
+					"linkLibraries" : []
+				},
+				"path" : "D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/bin/riscv-none-embed-g++.exe",
+				"version" : "8.2.0"
+			},
+			"language" : "CXX",
+			"sourceFileExtensions" : 
+			[
+				"C",
+				"M",
+				"c++",
+				"cc",
+				"cpp",
+				"cxx",
+				"mm",
+				"mpp",
+				"CPP",
+				"ixx",
+				"cppm"
+			]
+		}
+	],
+	"version" : 
+	{
+		"major" : 1,
+		"minor" : 0
+	}
+}
