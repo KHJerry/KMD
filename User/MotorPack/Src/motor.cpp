@@ -26,7 +26,7 @@ void Motor::Init(TIM_TypeDef *tD, TIM_TypeDef *tE)
     this->m_config_.acim_autoflux_enable            = false;
     this->m_config_.acim_autoflux_attack_gain       = 10.0f;
     this->m_config_.acim_autoflux_decay_gain        = 1.0f;
-    this->m_config_.R_wL_FF_enable                  = false;
+    this->m_config_.R_wL_FF_enable                  = true;
     this->m_config_.bEMF_FF_enable                  = false;
     this->m_config_.I_bus_hard_min                  = -INFINITY;
     this->m_config_.I_bus_hard_max                  =  INFINITY;
@@ -94,7 +94,7 @@ void Motor::Init(TIM_TypeDef *tD, TIM_TypeDef *tE)
     this->inductance                                = 0.0f;
 
     //Current CloseLoop Parameters
-    this->effective_current_limit                   = 17.0f;
+    this->effective_current_limit                   = 20.5f;
     this->pi_gains                                  = {0,0};
     this->I_measured_report_filter_k_               = 1.0f;
     this->Id_measured_                              = 0;
@@ -115,7 +115,7 @@ void Motor::Init(TIM_TypeDef *tD, TIM_TypeDef *tE)
     this->vel_gain_                                 = 1/12.f;
     this->vel_integrator_gain_                      = this->vel_gain_*5;
     this->vel_integrator_torque_                    = 0.0f;
-    this->vel_integrator_limit_                     = 500.0f;
+    this->vel_integrator_limit_                     = 50.0f;
 
     //Position Controller
     this->pos_setpoint                              = 0.f;
@@ -123,7 +123,7 @@ void Motor::Init(TIM_TypeDef *tD, TIM_TypeDef *tE)
     this->pos_err                                   = 0.f;
 
     //Torque Controller
-    this->torque_limit_                             = 1.2F;     //Nm
+    this->torque_limit_                             = 1.05F;     //Nm
     this->torque_setpoint_                          = 0.0f;
     this->torque_setpoint_src                       = 0;
     this->torque_constant_                          = 0.05F;    //Nm/A
@@ -457,14 +457,19 @@ void Motor::velovityLoop(uint32_t timestamp)
     }
 
     v_err = vel_setpoint_ - vel_estimate_;
-    torque += (vel_gain_ * gain_scheduling_multiplier)*v_err;
+    torque = (vel_gain_ * gain_scheduling_multiplier)*v_err;
     torque += vel_integrator_torque_;
 
 
     //限制力矩
     bool limit = false;
-    torque = torque > torque_limit_ ? torque_limit_ : torque;
-    torque = torque <-torque_limit_ ?-torque_limit_ : torque;
+    if(this->timer_driver_ == TIM1){
+        torque = torque > 0 ? 0 : torque;
+        torque = torque < -torque_limit_ ? -torque_limit_ : torque;
+    }else{
+        torque = torque > torque_limit_ ? torque_limit_ : torque;
+        torque = torque <0 ? 0 : torque;
+    }
     if(torque == torque_limit_ || torque == -torque_limit_) limit = true;
 
     if(limit) vel_integrator_torque_*=0.99f;

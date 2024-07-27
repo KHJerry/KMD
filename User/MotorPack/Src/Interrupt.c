@@ -57,17 +57,17 @@ void Interrupt_Configuration(void)
 
     //ADC注入中断配置
     NVIC_InitStructure.NVIC_IRQChannel = ADC_IRQn;                             //中断通道ADC_IRQn
-    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;                  //抢占优先级0
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;                  //抢占优先级0
     NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;                         //从优先级1
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;                            //中断使能
     NVIC_Init(&NVIC_InitStructure);                               //配置寄存器实体
 
     //Timer1中断配置
-    NVIC_InitStructure.NVIC_IRQChannel = TIM1_UP_IRQn;                        //中断通道TIM1_UP_IRQn
-    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;                 //抢占优先级0
-    NVIC_InitStructure.NVIC_IRQChannelSubPriority =0;                         //从优先级0
-    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;                           //中断使能
-    NVIC_Init(&NVIC_InitStructure);                              //配置寄存器实体
+//    NVIC_InitStructure.NVIC_IRQChannel = TIM1_UP_IRQn;                        //中断通道TIM1_UP_IRQn
+//    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;                 //抢占优先级0
+//    NVIC_InitStructure.NVIC_IRQChannelSubPriority =0;                         //从优先级0
+//    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;                           //中断使能
+//    NVIC_Init(&NVIC_InitStructure);                              //配置寄存器实体
 
     //Timer4中断配置
     NVIC_InitStructure.NVIC_IRQChannel = TIM4_IRQn;                        //中断通道TIM4_IRQn

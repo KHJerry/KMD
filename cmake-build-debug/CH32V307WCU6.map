@@ -1510,25 +1510,7 @@ Discarded input sections
  .text          0x0000000000000000        0x0 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
  .data          0x0000000000000000        0x0 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
  .bss           0x0000000000000000        0x0 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
- .sbss.RGB_timestamp_
-                0x0000000000000000        0x4 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
- .sbss.error_ibus_cnt
-                0x0000000000000000        0x2 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
- .sbss.error_vbus_cnt
-                0x0000000000000000        0x2 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
- .sbss.last_vel_set1
-                0x0000000000000000        0x4 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
- .sbss.last_vel_set2
-                0x0000000000000000        0x4 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
- .sbss.ms_delay_cnt
-                0x0000000000000000        0x4 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
- .sbss.repeatTime
-                0x0000000000000000        0x4 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
- .sbss.timestamp1_
-                0x0000000000000000        0x4 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
- .sbss.timestamp2_
-                0x0000000000000000        0x4 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
- .eh_frame      0x0000000000000000      0x1d0 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
+ .eh_frame      0x0000000000000000      0x164 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
  .group         0x0000000000000000        0xc CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
  .text          0x0000000000000000        0x0 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
  .data          0x0000000000000000        0x0 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
@@ -1539,8 +1521,14 @@ Discarded input sections
  .text          0x0000000000000000        0x0 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
  .data          0x0000000000000000        0x0 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
  .bss           0x0000000000000000        0x0 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+ .text._ZN5Motor12positionLoopEm
+                0x0000000000000000      0x218 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
  .text._ZN5Motor19Set_RGB_Breath_RateEhh
                 0x0000000000000000      0x166 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+ .rodata._ZN5Motor12positionLoopEm.cst4
+                0x0000000000000000        0x4 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+ .sbss._ZZN5Motor12positionLoopEmE16last_time_stamp_
+                0x0000000000000000        0x4 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
  .sbss._ZZN5Motor19Set_RGB_Breath_RateEhhE3cnt
                 0x0000000000000000        0x6 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
  .sbss._ZZN5Motor19Set_RGB_Breath_RateEhhE7reverse
@@ -1733,7 +1721,7 @@ END GROUP
                 0x0000000000000200                . = ALIGN (0x40)
  *fill*         0x00000000000001d8       0x28 
 
-.text           0x0000000000000200     0x9a70
+.text           0x0000000000000200     0x98b4
                 0x0000000000000200                . = ALIGN (0x4)
  *(.text)
  .text          0x0000000000000200       0x60 d:/software/ww/mounriver_studio/mounriver_studio/mounriver/mounriver_studio/toolchain/risc-v embedded gcc/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32imafcxw/ilp32f\libgcc.a(save-restore.o)
@@ -2006,6 +1994,7 @@ END GROUP
                 0x00000000000018b2                CAN1_SCE_IRQHandler
                 0x00000000000018b4                EXTI9_5_IRQHandler
                 0x00000000000018b6                TIM1_BRK_IRQHandler
+                0x00000000000018b8                TIM1_UP_IRQHandler
                 0x00000000000018ba                TIM1_TRG_COM_IRQHandler
                 0x00000000000018bc                TIM1_CC_IRQHandler
                 0x00000000000018be                TIM2_IRQHandler
@@ -2088,319 +2077,312 @@ END GROUP
                 0x0000000000001e6e      0x1be CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/HardWare.c.obj
                 0x0000000000001e6e                MY_TIM8_Init
  .text.MY_ADC_Init
-                0x000000000000202c      0x168 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/HardWare.c.obj
+                0x000000000000202c      0x16c CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/HardWare.c.obj
                 0x000000000000202c                MY_ADC_Init
  .text.MY_CAN_Init
-                0x0000000000002194       0xc4 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/HardWare.c.obj
-                0x0000000000002194                MY_CAN_Init
+                0x0000000000002198       0xc4 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/HardWare.c.obj
+                0x0000000000002198                MY_CAN_Init
  .text.NMI_Handler
-                0x0000000000002258        0x4 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/Interrupt.c.obj
-                0x0000000000002258                NMI_Handler
+                0x000000000000225c        0x4 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/Interrupt.c.obj
+                0x000000000000225c                NMI_Handler
  .text.HardFault_Handler
-                0x000000000000225c        0x2 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/Interrupt.c.obj
-                0x000000000000225c                HardFault_Handler
+                0x0000000000002260        0x2 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/Interrupt.c.obj
+                0x0000000000002260                HardFault_Handler
  .text.Interrupt_Configuration
-                0x000000000000225e       0x68 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/Interrupt.c.obj
-                0x000000000000225e                Interrupt_Configuration
+                0x0000000000002262       0x52 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/Interrupt.c.obj
+                0x0000000000002262                Interrupt_Configuration
  .text.OTG_FS_IRQHandler
-                0x00000000000022c6      0x746 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/Interrupt.c.obj
-                0x00000000000022c6                OTG_FS_IRQHandler
+                0x00000000000022b4      0x746 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/Interrupt.c.obj
+                0x00000000000022b4                OTG_FS_IRQHandler
  .text.ADC1_2_IRQHandler
-                0x0000000000002a0c      0x93c CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
-                0x0000000000002a0c                ADC1_2_IRQHandler
- .text.TIM1_UP_IRQHandler
-                0x0000000000003348       0x9a CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
-                0x0000000000003348                TIM1_UP_IRQHandler
+                0x00000000000029fa      0x9fe CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
+                0x00000000000029fa                ADC1_2_IRQHandler
  .text.TIM4_IRQHandler
-                0x00000000000033e2      0x2f0 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
-                0x00000000000033e2                TIM4_IRQHandler
+                0x00000000000033f8      0x2f0 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
+                0x00000000000033f8                TIM4_IRQHandler
  .text.USB_LP_CAN1_RX0_IRQHandler
-                0x00000000000036d2       0xc8 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
-                0x00000000000036d2                USB_LP_CAN1_RX0_IRQHandler
+                0x00000000000036e8       0xc8 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
+                0x00000000000036e8                USB_LP_CAN1_RX0_IRQHandler
  .text._ZN5MotorC2Ev
-                0x000000000000379a      0x30e CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
-                0x000000000000379a                Motor::Motor()
-                0x000000000000379a                Motor::Motor()
+                0x00000000000037b0      0x30e CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
+                0x00000000000037b0                Motor::Motor()
+                0x00000000000037b0                Motor::Motor()
  .text._Z41__static_initialization_and_destruction_0ii
-                0x0000000000003aa8       0x2c CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
+                0x0000000000003abe       0x2c CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
  .text.app_main
-                0x0000000000003ad4      0x314 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
-                0x0000000000003ad4                app_main
+                0x0000000000003aea      0x36e CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
+                0x0000000000003aea                app_main
  .text._GLOBAL__sub_I_motor1
-                0x0000000000003de8       0x10 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
+                0x0000000000003e58       0x12 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
  .text._ZN5Motor4InitEP11TIM_TypeDefS1_
-                0x0000000000003df8      0x28e CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
-                0x0000000000003df8                Motor::Init(TIM_TypeDef*, TIM_TypeDef*)
+                0x0000000000003e6a      0x290 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+                0x0000000000003e6a                Motor::Init(TIM_TypeDef*, TIM_TypeDef*)
  .text._ZN5Motor5startEv
-                0x0000000000004086       0x50 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
-                0x0000000000004086                Motor::start()
+                0x00000000000040fa       0x50 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+                0x00000000000040fa                Motor::start()
  .text._ZN5Motor17apply_pwm_timingsEv
-                0x00000000000040d6       0xe8 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
-                0x00000000000040d6                Motor::apply_pwm_timings()
+                0x000000000000414a       0xe8 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+                0x000000000000414a                Motor::apply_pwm_timings()
  .text._ZN5Motor16measure_currentsEttt
-                0x00000000000041be       0x9e CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
-                0x00000000000041be                Motor::measure_currents(unsigned short, unsigned short, unsigned short)
+                0x0000000000004232       0x9e CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+                0x0000000000004232                Motor::measure_currents(unsigned short, unsigned short, unsigned short)
  .text._ZN5Motor17measureResistanceEv
-                0x000000000000425c      0x1e8 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
-                0x000000000000425c                Motor::measureResistance()
+                0x00000000000042d0      0x1e8 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+                0x00000000000042d0                Motor::measureResistance()
  .text._ZN5Motor13getResistanceEv
-                0x0000000000004444       0x40 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
-                0x0000000000004444                Motor::getResistance()
+                0x00000000000044b8       0x40 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+                0x00000000000044b8                Motor::getResistance()
  .text._ZN5Motor17measureInductanceEm
-                0x0000000000004484      0x236 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
-                0x0000000000004484                Motor::measureInductance(unsigned long)
+                0x00000000000044f8      0x236 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+                0x00000000000044f8                Motor::measureInductance(unsigned long)
  .text._ZN5Motor13getInductanceEv
-                0x00000000000046ba       0x40 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
-                0x00000000000046ba                Motor::getInductance()
+                0x000000000000472e       0x40 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+                0x000000000000472e                Motor::getInductance()
  .text._ZN5Motor4shutEv
-                0x00000000000046fa       0x16 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
-                0x00000000000046fa                Motor::shut()
+                0x000000000000476e       0x16 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+                0x000000000000476e                Motor::shut()
  .text._ZN5Motor20measurePhasePhaseVelEv
-                0x0000000000004710      0x286 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
-                0x0000000000004710                Motor::measurePhasePhaseVel()
+                0x0000000000004784      0x286 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+                0x0000000000004784                Motor::measurePhasePhaseVel()
  .text._ZN5Motor14measureEncoderEm
-                0x0000000000004996      0x400 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
-                0x0000000000004996                Motor::measureEncoder(unsigned long)
+                0x0000000000004a0a      0x400 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+                0x0000000000004a0a                Motor::measureEncoder(unsigned long)
  .text._ZN5Motor21get_alpha_beta_outputEmPNS_7float2DE
-                0x0000000000004d96      0x2f2 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
-                0x0000000000004d96                Motor::get_alpha_beta_output(unsigned long, Motor::float2D*)
+                0x0000000000004e0a      0x2ee CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+                0x0000000000004e0a                Motor::get_alpha_beta_output(unsigned long, Motor::float2D*)
  .text._ZN5Motor31update_current_controller_gainsEv
-                0x0000000000005088       0x20 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
-                0x0000000000005088                Motor::update_current_controller_gains()
+                0x00000000000050f8       0x20 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+                0x00000000000050f8                Motor::update_current_controller_gains()
  .text._ZN5Motor12velovityLoopEm
-                0x00000000000050a8      0x138 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
-                0x00000000000050a8                Motor::velovityLoop(unsigned long)
- .text._ZN5Motor12positionLoopEm
-                0x00000000000051e0      0x210 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
-                0x00000000000051e0                Motor::positionLoop(unsigned long)
+                0x0000000000005118      0x11a CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+                0x0000000000005118                Motor::velovityLoop(unsigned long)
  .text._ZN5Motor7go_zeroEv
-                0x00000000000053f0      0x102 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
-                0x00000000000053f0                Motor::go_zero()
+                0x0000000000005232      0x102 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+                0x0000000000005232                Motor::go_zero()
  .text.SetSysClockTo144_HSE
-                0x00000000000054f2       0xb2 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/system_ch32v30x.c.obj
+                0x0000000000005334       0xb2 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/system_ch32v30x.c.obj
  .text.SetSysClock
-                0x00000000000055a4        0xa CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/system_ch32v30x.c.obj
+                0x00000000000053e6        0xa CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/system_ch32v30x.c.obj
  .text.SystemInit
-                0x00000000000055ae       0x5a CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/system_ch32v30x.c.obj
-                0x00000000000055ae                SystemInit
+                0x00000000000053f0       0x5a CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/system_ch32v30x.c.obj
+                0x00000000000053f0                SystemInit
  .text.SystemCoreClockUpdate
-                0x0000000000005608      0x112 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/system_ch32v30x.c.obj
-                0x0000000000005608                SystemCoreClockUpdate
- .text.main     0x000000000000571a       0x40 CMakeFiles/CH32V307WCU6.elf.dir/User/main.c.obj
-                0x000000000000571a                main
- .text.cosf     0x000000000000575a       0x7a D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-sf_cos.o)
-                0x000000000000575a                cosf
- .text.floorf   0x00000000000057d4       0xb2 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-sf_floor.o)
-                0x00000000000057d4                floorf
+                0x000000000000544a      0x112 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/system_ch32v30x.c.obj
+                0x000000000000544a                SystemCoreClockUpdate
+ .text.main     0x000000000000555c       0x40 CMakeFiles/CH32V307WCU6.elf.dir/User/main.c.obj
+                0x000000000000555c                main
+ .text.cosf     0x000000000000559c       0x7a D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-sf_cos.o)
+                0x000000000000559c                cosf
+ .text.floorf   0x0000000000005616       0xb2 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-sf_floor.o)
+                0x0000000000005616                floorf
  .text.nearbyintf
-                0x0000000000005886        0x2 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-sf_nearbyint.o)
-                0x0000000000005886                nearbyintf
- .text.rintf    0x0000000000005888       0xd2 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-sf_rint.o)
-                0x0000000000005888                rintf
- .text.sinf     0x000000000000595a       0x78 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-sf_sin.o)
-                0x000000000000595a                sinf
- .text.sqrt     0x00000000000059d2       0xb8 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-w_sqrt.o)
-                0x00000000000059d2                sqrt
- .text.sqrtf    0x0000000000005a8a       0xa6 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-wf_sqrt.o)
-                0x0000000000005a8a                sqrtf
+                0x00000000000056c8        0x2 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-sf_nearbyint.o)
+                0x00000000000056c8                nearbyintf
+ .text.rintf    0x00000000000056ca       0xd2 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-sf_rint.o)
+                0x00000000000056ca                rintf
+ .text.sinf     0x000000000000579c       0x78 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-sf_sin.o)
+                0x000000000000579c                sinf
+ .text.sqrt     0x0000000000005814       0xb8 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-w_sqrt.o)
+                0x0000000000005814                sqrt
+ .text.sqrtf    0x00000000000058cc       0xa6 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-wf_sqrt.o)
+                0x00000000000058cc                sqrtf
  .text.__ieee754_sqrt
-                0x0000000000005b30      0x1d6 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-e_sqrt.o)
-                0x0000000000005b30                __ieee754_sqrt
+                0x0000000000005972      0x1d6 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-e_sqrt.o)
+                0x0000000000005972                __ieee754_sqrt
  .text.__ieee754_rem_pio2f
-                0x0000000000005d06      0x2b4 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-ef_rem_pio2.o)
-                0x0000000000005d06                __ieee754_rem_pio2f
+                0x0000000000005b48      0x2b4 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-ef_rem_pio2.o)
+                0x0000000000005b48                __ieee754_rem_pio2f
  .text.__ieee754_sqrtf
-                0x0000000000005fba       0xcc D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-ef_sqrt.o)
-                0x0000000000005fba                __ieee754_sqrtf
+                0x0000000000005dfc       0xcc D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-ef_sqrt.o)
+                0x0000000000005dfc                __ieee754_sqrtf
  .text.__kernel_cosf
-                0x0000000000006086      0x140 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-kf_cos.o)
-                0x0000000000006086                __kernel_cosf
+                0x0000000000005ec8      0x140 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-kf_cos.o)
+                0x0000000000005ec8                __kernel_cosf
  .text.__kernel_rem_pio2f
-                0x00000000000061c6      0x6f4 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-kf_rem_pio2.o)
-                0x00000000000061c6                __kernel_rem_pio2f
+                0x0000000000006008      0x6f4 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-kf_rem_pio2.o)
+                0x0000000000006008                __kernel_rem_pio2f
  .text.__kernel_sinf
-                0x00000000000068ba       0xa2 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-kf_sin.o)
-                0x00000000000068ba                __kernel_sinf
- .text.matherr  0x000000000000695c        0x4 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-s_matherr.o)
-                0x000000000000695c                matherr
- .text.fabsf    0x0000000000006960        0xe D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-sf_fabs.o)
-                0x0000000000006960                fabsf
- .text.scalbnf  0x000000000000696e      0x100 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-sf_scalbn.o)
-                0x000000000000696e                scalbnf
+                0x00000000000066fc       0xa2 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-kf_sin.o)
+                0x00000000000066fc                __kernel_sinf
+ .text.matherr  0x000000000000679e        0x4 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-s_matherr.o)
+                0x000000000000679e                matherr
+ .text.fabsf    0x00000000000067a2        0xe D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-sf_fabs.o)
+                0x00000000000067a2                fabsf
+ .text.scalbnf  0x00000000000067b0      0x100 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-sf_scalbn.o)
+                0x00000000000067b0                scalbnf
  .text.copysignf
-                0x0000000000006a6e       0x1c D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-sf_copysign.o)
-                0x0000000000006a6e                copysignf
+                0x00000000000068b0       0x1c D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-sf_copysign.o)
+                0x00000000000068b0                copysignf
  .text.__adddf3
-                0x0000000000006a8a      0xa0e d:/software/ww/mounriver_studio/mounriver_studio/mounriver/mounriver_studio/toolchain/risc-v embedded gcc/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32imafcxw/ilp32f\libgcc.a(adddf3.o)
-                0x0000000000006a8a                __adddf3
+                0x00000000000068cc      0xa0e d:/software/ww/mounriver_studio/mounriver_studio/mounriver/mounriver_studio/toolchain/risc-v embedded gcc/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32imafcxw/ilp32f\libgcc.a(adddf3.o)
+                0x00000000000068cc                __adddf3
  .text.__divdf3
-                0x0000000000007498      0x7ea d:/software/ww/mounriver_studio/mounriver_studio/mounriver/mounriver_studio/toolchain/risc-v embedded gcc/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32imafcxw/ilp32f\libgcc.a(divdf3.o)
-                0x0000000000007498                __divdf3
- .text.__ledf2  0x0000000000007c82       0xb6 d:/software/ww/mounriver_studio/mounriver_studio/mounriver/mounriver_studio/toolchain/risc-v embedded gcc/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32imafcxw/ilp32f\libgcc.a(ledf2.o)
-                0x0000000000007c82                __ledf2
-                0x0000000000007c82                __ltdf2
+                0x00000000000072da      0x7ea d:/software/ww/mounriver_studio/mounriver_studio/mounriver/mounriver_studio/toolchain/risc-v embedded gcc/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32imafcxw/ilp32f\libgcc.a(divdf3.o)
+                0x00000000000072da                __divdf3
+ .text.__ledf2  0x0000000000007ac4       0xb6 d:/software/ww/mounriver_studio/mounriver_studio/mounriver/mounriver_studio/toolchain/risc-v embedded gcc/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32imafcxw/ilp32f\libgcc.a(ledf2.o)
+                0x0000000000007ac4                __ledf2
+                0x0000000000007ac4                __ltdf2
  .text.__muldf3
-                0x0000000000007d38      0x656 d:/software/ww/mounriver_studio/mounriver_studio/mounriver/mounriver_studio/toolchain/risc-v embedded gcc/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32imafcxw/ilp32f\libgcc.a(muldf3.o)
-                0x0000000000007d38                __muldf3
+                0x0000000000007b7a      0x656 d:/software/ww/mounriver_studio/mounriver_studio/mounriver/mounriver_studio/toolchain/risc-v embedded gcc/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32imafcxw/ilp32f\libgcc.a(muldf3.o)
+                0x0000000000007b7a                __muldf3
  .text.__subdf3
-                0x000000000000838e      0xa8c d:/software/ww/mounriver_studio/mounriver_studio/mounriver/mounriver_studio/toolchain/risc-v embedded gcc/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32imafcxw/ilp32f\libgcc.a(subdf3.o)
-                0x000000000000838e                __subdf3
+                0x00000000000081d0      0xa8c d:/software/ww/mounriver_studio/mounriver_studio/mounriver/mounriver_studio/toolchain/risc-v embedded gcc/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32imafcxw/ilp32f\libgcc.a(subdf3.o)
+                0x00000000000081d0                __subdf3
  .text.__unorddf2
-                0x0000000000008e1a       0x7c d:/software/ww/mounriver_studio/mounriver_studio/mounriver/mounriver_studio/toolchain/risc-v embedded gcc/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32imafcxw/ilp32f\libgcc.a(unorddf2.o)
-                0x0000000000008e1a                __unorddf2
+                0x0000000000008c5c       0x7c d:/software/ww/mounriver_studio/mounriver_studio/mounriver/mounriver_studio/toolchain/risc-v embedded gcc/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32imafcxw/ilp32f\libgcc.a(unorddf2.o)
+                0x0000000000008c5c                __unorddf2
  .text.__extendsfdf2
-                0x0000000000008e96       0xe8 d:/software/ww/mounriver_studio/mounriver_studio/mounriver/mounriver_studio/toolchain/risc-v embedded gcc/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32imafcxw/ilp32f\libgcc.a(extendsfdf2.o)
-                0x0000000000008e96                __extendsfdf2
+                0x0000000000008cd8       0xe8 d:/software/ww/mounriver_studio/mounriver_studio/mounriver/mounriver_studio/toolchain/risc-v embedded gcc/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32imafcxw/ilp32f\libgcc.a(extendsfdf2.o)
+                0x0000000000008cd8                __extendsfdf2
  .text.__truncdfsf2
-                0x0000000000008f7e      0x31e d:/software/ww/mounriver_studio/mounriver_studio/mounriver/mounriver_studio/toolchain/risc-v embedded gcc/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32imafcxw/ilp32f\libgcc.a(truncdfsf2.o)
-                0x0000000000008f7e                __truncdfsf2
+                0x0000000000008dc0      0x31e d:/software/ww/mounriver_studio/mounriver_studio/mounriver/mounriver_studio/toolchain/risc-v embedded gcc/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32imafcxw/ilp32f\libgcc.a(truncdfsf2.o)
+                0x0000000000008dc0                __truncdfsf2
  .text.__clzsi2
-                0x000000000000929c       0x6e d:/software/ww/mounriver_studio/mounriver_studio/mounriver/mounriver_studio/toolchain/risc-v embedded gcc/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32imafcxw/ilp32f\libgcc.a(_clzsi2.o)
-                0x000000000000929c                __clzsi2
- .text.__errno  0x000000000000930a        0x8 d:/software/ww/mounriver_studio/mounriver_studio/mounriver/mounriver_studio/toolchain/risc-v embedded gcc/bin/../lib/gcc/riscv-none-embed/8.2.0/../../../../riscv-none-embed/lib/rv32imafcxw/ilp32f\libg_nano.a(lib_a-errno.o)
-                0x000000000000930a                __errno
- .text.memcpy   0x0000000000009312       0xb2 d:/software/ww/mounriver_studio/mounriver_studio/mounriver/mounriver_studio/toolchain/risc-v embedded gcc/bin/../lib/gcc/riscv-none-embed/8.2.0/../../../../riscv-none-embed/lib/rv32imafcxw/ilp32f\libg_nano.a(lib_a-memcpy.o)
-                0x0000000000009312                memcpy
+                0x00000000000090de       0x6e d:/software/ww/mounriver_studio/mounriver_studio/mounriver/mounriver_studio/toolchain/risc-v embedded gcc/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32imafcxw/ilp32f\libgcc.a(_clzsi2.o)
+                0x00000000000090de                __clzsi2
+ .text.__errno  0x000000000000914c        0x8 d:/software/ww/mounriver_studio/mounriver_studio/mounriver/mounriver_studio/toolchain/risc-v embedded gcc/bin/../lib/gcc/riscv-none-embed/8.2.0/../../../../riscv-none-embed/lib/rv32imafcxw/ilp32f\libg_nano.a(lib_a-errno.o)
+                0x000000000000914c                __errno
+ .text.memcpy   0x0000000000009154       0xb2 d:/software/ww/mounriver_studio/mounriver_studio/mounriver/mounriver_studio/toolchain/risc-v embedded gcc/bin/../lib/gcc/riscv-none-embed/8.2.0/../../../../riscv-none-embed/lib/rv32imafcxw/ilp32f\libg_nano.a(lib_a-memcpy.o)
+                0x0000000000009154                memcpy
  *(.rodata)
  *(.rodata*)
- *fill*         0x00000000000093c4        0x0 
+ *fill*         0x0000000000009206        0x2 
  .rodata.MyCfgDescr
-                0x00000000000093c4       0x43 CMakeFiles/CH32V307WCU6.elf.dir/Peripheral/src/usb_desc.c.obj
-                0x00000000000093c4                MyCfgDescr
- *fill*         0x0000000000009407        0x1 
+                0x0000000000009208       0x43 CMakeFiles/CH32V307WCU6.elf.dir/Peripheral/src/usb_desc.c.obj
+                0x0000000000009208                MyCfgDescr
+ *fill*         0x000000000000924b        0x1 
  .rodata.MyDevDescr
-                0x0000000000009408       0x12 CMakeFiles/CH32V307WCU6.elf.dir/Peripheral/src/usb_desc.c.obj
-                0x0000000000009408                MyDevDescr
- *fill*         0x000000000000941a        0x2 
+                0x000000000000924c       0x12 CMakeFiles/CH32V307WCU6.elf.dir/Peripheral/src/usb_desc.c.obj
+                0x000000000000924c                MyDevDescr
+ *fill*         0x000000000000925e        0x2 
  .rodata.MyManuInfo
-                0x000000000000941c        0xe CMakeFiles/CH32V307WCU6.elf.dir/Peripheral/src/usb_desc.c.obj
-                0x000000000000941c                MyManuInfo
- *fill*         0x000000000000942a        0x2 
+                0x0000000000009260        0xe CMakeFiles/CH32V307WCU6.elf.dir/Peripheral/src/usb_desc.c.obj
+                0x0000000000009260                MyManuInfo
+ *fill*         0x000000000000926e        0x2 
  .rodata.MyProdInfo
-                0x000000000000942c       0x16 CMakeFiles/CH32V307WCU6.elf.dir/Peripheral/src/usb_desc.c.obj
-                0x000000000000942c                MyProdInfo
- *fill*         0x0000000000009442        0x2 
+                0x0000000000009270       0x16 CMakeFiles/CH32V307WCU6.elf.dir/Peripheral/src/usb_desc.c.obj
+                0x0000000000009270                MyProdInfo
+ *fill*         0x0000000000009286        0x2 
  .rodata.MySerNumInfo
-                0x0000000000009444       0x16 CMakeFiles/CH32V307WCU6.elf.dir/Peripheral/src/usb_desc.c.obj
-                0x0000000000009444                MySerNumInfo
- *fill*         0x000000000000945a        0x2 
+                0x0000000000009288       0x16 CMakeFiles/CH32V307WCU6.elf.dir/Peripheral/src/usb_desc.c.obj
+                0x0000000000009288                MySerNumInfo
+ *fill*         0x000000000000929e        0x2 
  .rodata.MY_TIM8_Init.cst4
-                0x000000000000945c        0x4 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/HardWare.c.obj
+                0x00000000000092a0        0x4 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/HardWare.c.obj
  .rodata.OTG_FS_IRQHandler
-                0x0000000000009460       0x30 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/Interrupt.c.obj
+                0x00000000000092a4       0x30 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/Interrupt.c.obj
  .rodata.ADC1_2_IRQHandler
-                0x0000000000009490       0x68 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
+                0x00000000000092d4       0x68 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
  .rodata.ADC1_2_IRQHandler.cst4
-                0x00000000000094f8       0x24 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
+                0x000000000000933c       0x24 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
+                                         0x28 (size before relaxing)
  .rodata.app_main
-                0x000000000000951c       0x18 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
+                0x0000000000009360       0x18 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
  .rodata._ZN5MotorC2Ev.cst4
-                0x0000000000009534       0x78 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
+                0x0000000000009378       0x78 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
                                          0x80 (size before relaxing)
  .rodata.app_main.cst4
-                0x00000000000095ac       0x18 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
+                0x00000000000093f0       0x1c CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
  .rodata._ZN5Motor17measureResistanceEv
-                0x00000000000095c4       0x1c CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+                0x000000000000940c       0x1c CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
  .rodata._ZN5Motor17measureInductanceEm
-                0x00000000000095e0       0x1c CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+                0x0000000000009428       0x1c CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
  .rodata._ZN5Motor14measureEncoderEm
-                0x00000000000095fc       0x1c CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+                0x0000000000009444       0x1c CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
  .rodata._ZN5Motor7go_zeroEv
-                0x0000000000009618       0x1c CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
- .rodata._ZN5Motor12velovityLoopEm.cst4
-                0x0000000000009634        0x4 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+                0x0000000000009460       0x1c CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
  .rodata._ZN5Motor13getInductanceEv.cst4
-                0x0000000000009638        0x4 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+                0x000000000000947c        0x4 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
  .rodata._ZN5Motor14measureEncoderEm.cst4
-                0x000000000000963c        0x4 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+                0x0000000000009480        0x4 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
                                          0x14 (size before relaxing)
  .rodata._ZN5Motor16measure_currentsEttt.cst4
-                0x0000000000009640        0x4 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+                0x0000000000009484        0x4 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
                                          0x10 (size before relaxing)
  .rodata._ZN5Motor17apply_pwm_timingsEv.cst4
-                0x0000000000009644        0x8 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+                0x0000000000009488        0x8 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
  .rodata._ZN5Motor17measureInductanceEm.cst4
-                0x000000000000964c        0x4 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+                0x0000000000009490        0x4 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
  .rodata._ZN5Motor20measurePhasePhaseVelEv.cst4
-                0x0000000000009650        0x8 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+                0x0000000000009494        0x8 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
  .rodata._ZN5Motor21get_alpha_beta_outputEmPNS_7float2DE.cst4
-                0x0000000000009658        0xc CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+                0x000000000000949c        0xc CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
  .rodata._ZN5Motor4InitEP11TIM_TypeDefS1_.cst4
-                0x0000000000009664       0x20 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+                0x00000000000094a8       0x20 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
                                          0x78 (size before relaxing)
  .rodata._ZN5Motor7go_zeroEv.cst4
-                0x0000000000009684       0x14 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+                0x00000000000094c8       0x14 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
                                          0x18 (size before relaxing)
  .rodata.floorf.cst4
-                0x0000000000009698        0x4 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-sf_floor.o)
+                0x00000000000094dc        0x4 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-sf_floor.o)
                                           0x8 (size before relaxing)
  .rodata.sqrt.str1.4
-                0x000000000000969c        0x5 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-w_sqrt.o)
- *fill*         0x00000000000096a1        0x3 
+                0x00000000000094e0        0x5 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-w_sqrt.o)
+ *fill*         0x00000000000094e5        0x3 
  .rodata.sqrtf.str1.4
-                0x00000000000096a4        0x8 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-wf_sqrt.o)
+                0x00000000000094e8        0x8 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-wf_sqrt.o)
                                           0x6 (size before relaxing)
  .rodata.__ieee754_rem_pio2f.cst4
-                0x00000000000096ac       0x20 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-ef_rem_pio2.o)
+                0x00000000000094f0       0x20 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-ef_rem_pio2.o)
                                          0x24 (size before relaxing)
  .rodata.npio2_hw
-                0x00000000000096cc       0x80 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-ef_rem_pio2.o)
+                0x0000000000009510       0x80 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-ef_rem_pio2.o)
  .rodata.two_over_pi
-                0x000000000000974c      0x318 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-ef_rem_pio2.o)
+                0x0000000000009590      0x318 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-ef_rem_pio2.o)
  .rodata.__kernel_cosf.cst4
-                0x0000000000009a64       0x20 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-kf_cos.o)
+                0x00000000000098a8       0x20 D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-kf_cos.o)
                                          0x28 (size before relaxing)
- .rodata.PIo2   0x0000000000009a84       0x2c D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-kf_rem_pio2.o)
+ .rodata.PIo2   0x00000000000098c8       0x2c D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-kf_rem_pio2.o)
  .rodata.__kernel_rem_pio2f.cst4
-                0x0000000000009ab0        0xc D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-kf_rem_pio2.o)
+                0x00000000000098f4        0xc D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-kf_rem_pio2.o)
                                          0x1c (size before relaxing)
  .rodata.init_jk
-                0x0000000000009abc        0xc D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-kf_rem_pio2.o)
+                0x0000000000009900        0xc D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-kf_rem_pio2.o)
  .rodata.__kernel_sinf.cst4
-                0x0000000000009ac8       0x1c D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-kf_sin.o)
+                0x000000000000990c       0x1c D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-kf_sin.o)
                                          0x20 (size before relaxing)
  .rodata.scalbnf.cst4
-                0x0000000000009ae4        0xc D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-sf_scalbn.o)
+                0x0000000000009928        0xc D:/SoftWare/WW/MounRiver_Studio/MounRiver_Studio/MounRiver/MounRiver_Studio/toolchain/RISC-V Embedded GCC/riscv-none-embed/lib/rv32imafcxw/ilp32f/libm.a(lib_a-sf_scalbn.o)
                                          0x10 (size before relaxing)
  .rodata.__divdf3
-                0x0000000000009af0       0x40 d:/software/ww/mounriver_studio/mounriver_studio/mounriver/mounriver_studio/toolchain/risc-v embedded gcc/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32imafcxw/ilp32f\libgcc.a(divdf3.o)
+                0x0000000000009934       0x40 d:/software/ww/mounriver_studio/mounriver_studio/mounriver/mounriver_studio/toolchain/risc-v embedded gcc/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32imafcxw/ilp32f\libgcc.a(divdf3.o)
  .rodata.__muldf3
-                0x0000000000009b30       0x40 d:/software/ww/mounriver_studio/mounriver_studio/mounriver/mounriver_studio/toolchain/risc-v embedded gcc/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32imafcxw/ilp32f\libgcc.a(muldf3.o)
+                0x0000000000009974       0x40 d:/software/ww/mounriver_studio/mounriver_studio/mounriver/mounriver_studio/toolchain/risc-v embedded gcc/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32imafcxw/ilp32f\libgcc.a(muldf3.o)
  .rodata.__clz_tab
-                0x0000000000009b70      0x100 d:/software/ww/mounriver_studio/mounriver_studio/mounriver/mounriver_studio/toolchain/risc-v embedded gcc/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32imafcxw/ilp32f\libgcc.a(_clz.o)
-                0x0000000000009b70                __clz_tab
+                0x00000000000099b4      0x100 d:/software/ww/mounriver_studio/mounriver_studio/mounriver/mounriver_studio/toolchain/risc-v embedded gcc/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32imafcxw/ilp32f\libgcc.a(_clz.o)
+                0x00000000000099b4                __clz_tab
  *(.gnu.linkonce.t.*)
-                0x0000000000009c70                . = ALIGN (0x4)
+                0x0000000000009ab4                . = ALIGN (0x4)
 
-.rela.dyn       0x0000000000009c70        0x0
- .rela.init     0x0000000000009c70        0x0 CMakeFiles/CH32V307WCU6.elf.dir/Debug/debug.c.obj
- .rela.vector   0x0000000000009c70        0x0 CMakeFiles/CH32V307WCU6.elf.dir/Debug/debug.c.obj
+.rela.dyn       0x0000000000009ab4        0x0
+ .rela.init     0x0000000000009ab4        0x0 CMakeFiles/CH32V307WCU6.elf.dir/Debug/debug.c.obj
+ .rela.vector   0x0000000000009ab4        0x0 CMakeFiles/CH32V307WCU6.elf.dir/Debug/debug.c.obj
  .rela.text.handle_reset
-                0x0000000000009c70        0x0 CMakeFiles/CH32V307WCU6.elf.dir/Debug/debug.c.obj
+                0x0000000000009ab4        0x0 CMakeFiles/CH32V307WCU6.elf.dir/Debug/debug.c.obj
  .rela.text._Z41__static_initialization_and_destruction_0ii
-                0x0000000000009c70        0x0 CMakeFiles/CH32V307WCU6.elf.dir/Debug/debug.c.obj
+                0x0000000000009ab4        0x0 CMakeFiles/CH32V307WCU6.elf.dir/Debug/debug.c.obj
  .rela.data.impure_data
-                0x0000000000009c70        0x0 CMakeFiles/CH32V307WCU6.elf.dir/Debug/debug.c.obj
+                0x0000000000009ab4        0x0 CMakeFiles/CH32V307WCU6.elf.dir/Debug/debug.c.obj
 
-.fini           0x0000000000009c70        0x0
+.fini           0x0000000000009ab4        0x0
  *(SORT_NONE(.fini))
-                0x0000000000009c70                . = ALIGN (0x4)
+                0x0000000000009ab4                . = ALIGN (0x4)
                 [!provide]                        PROVIDE (_etext = .)
                 [!provide]                        PROVIDE (_eitcm = .)
 
-.preinit_array  0x0000000000009c70        0x0
+.preinit_array  0x0000000000009ab4        0x0
                 [!provide]                        PROVIDE (__preinit_array_start = .)
  *(.preinit_array)
                 [!provide]                        PROVIDE (__preinit_array_end = .)
 
-.init_array     0x0000000000009c70        0x4
+.init_array     0x0000000000009ab4        0x4
                 [!provide]                        PROVIDE (__init_array_start = .)
  *(SORT_BY_INIT_PRIORITY(.init_array.*) SORT_BY_INIT_PRIORITY(.ctors.*))
  *(.init_array EXCLUDE_FILE(*crtend?.o *crtend.o *crtbegin?.o *crtbegin.o) .ctors)
- .init_array    0x0000000000009c70        0x4 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
+ .init_array    0x0000000000009ab4        0x4 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
                 [!provide]                        PROVIDE (__init_array_end = .)
 
-.fini_array     0x0000000000009c74        0x0
+.fini_array     0x0000000000009ab8        0x0
                 [!provide]                        PROVIDE (__fini_array_start = .)
  *(SORT_BY_INIT_PRIORITY(.fini_array.*) SORT_BY_INIT_PRIORITY(.dtors.*))
  *(.fini_array EXCLUDE_FILE(*crtend?.o *crtend.o *crtbegin?.o *crtbegin.o) .dtors)
@@ -2420,15 +2402,15 @@ END GROUP
  *(SORT_BY_NAME(.dtors.*))
  *(.dtors)
 
-.dalign         0x0000000020000000        0x0 load address 0x0000000000009c74
+.dalign         0x0000000020000000        0x0 load address 0x0000000000009ab8
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                PROVIDE (_data_vma = .)
 
-.dlalign        0x0000000000009c74        0x0
-                0x0000000000009c74                . = ALIGN (0x4)
-                0x0000000000009c74                PROVIDE (_data_lma = .)
+.dlalign        0x0000000000009ab8        0x0
+                0x0000000000009ab8                . = ALIGN (0x4)
+                0x0000000000009ab8                PROVIDE (_data_lma = .)
 
-.data           0x0000000020000000       0x90 load address 0x0000000000009c74
+.data           0x0000000020000000       0x90 load address 0x0000000000009ab8
  *(.gnu.linkonce.r.*)
  *(.data .data.*)
  .data.AHBPrescTable
@@ -2468,7 +2450,7 @@ END GROUP
                 0x0000000020000090                . = ALIGN (0x4)
                 0x0000000020000090                PROVIDE (_edata = .)
 
-.bss            0x0000000020000090     0x11bc load address 0x0000000000009d04
+.bss            0x0000000020000090     0x11bc load address 0x0000000000009b48
                 0x0000000020000090                . = ALIGN (0x4)
                 0x0000000020000090                PROVIDE (_sbss = .)
  *(.sbss*)
@@ -2514,11 +2496,12 @@ END GROUP
  .sbss.pUSBFS_Descr
                 0x00000000200000b0        0x4 CMakeFiles/CH32V307WCU6.elf.dir/Peripheral/src/ch32v30x_usbfs_device.c.obj
                 0x00000000200000b0                pUSBFS_Descr
- .sbss.timestamp_
+ .sbss.timestamp1_
                 0x00000000200000b4        0x4 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
-                0x00000000200000b4                timestamp_
- .sbss._ZZN5Motor12positionLoopEmE16last_time_stamp_
-                0x00000000200000b8        0x4 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+                0x00000000200000b4                timestamp1_
+ .sbss.timestamp2_
+                0x00000000200000b8        0x4 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
+                0x00000000200000b8                timestamp2_
  *(.gnu.linkonce.sb.*)
  *(.bss*)
  .bss.USBFS_EP0_Buf
@@ -2562,7 +2545,7 @@ END GROUP
                 0x0000000020008000                PROVIDE (_eusrstack = .)
 OUTPUT(CH32V307WCU6.elf elf32-littleriscv)
 
-.debug_info     0x0000000000000000    0x20066
+.debug_info     0x0000000000000000    0x1feb2
  .debug_info    0x0000000000000000      0xa90 CMakeFiles/CH32V307WCU6.elf.dir/Debug/debug.c.obj
  .debug_info    0x0000000000000a90      0xe1c CMakeFiles/CH32V307WCU6.elf.dir/Peripheral/src/ch32v30x_adc.c.obj
  .debug_info    0x00000000000018ac      0xdb2 CMakeFiles/CH32V307WCU6.elf.dir/Peripheral/src/ch32v30x_can.c.obj
@@ -2573,15 +2556,15 @@ OUTPUT(CH32V307WCU6.elf elf32-littleriscv)
  .debug_info    0x0000000000006683     0x17b9 CMakeFiles/CH32V307WCU6.elf.dir/Peripheral/src/ch32v30x_usbfs_device.c.obj
  .debug_info    0x0000000000007e3c      0xa06 CMakeFiles/CH32V307WCU6.elf.dir/Peripheral/src/usb_desc.c.obj
  .debug_info    0x0000000000008842       0x22 CMakeFiles/CH32V307WCU6.elf.dir/Startup/startup_ch32v30x_D8C.S.obj
- .debug_info    0x0000000000008864     0x2b35 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/HardWare.c.obj
- .debug_info    0x000000000000b399     0x1248 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/Interrupt.c.obj
- .debug_info    0x000000000000c5e1     0x613b CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
- .debug_info    0x000000000001271c     0x5897 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
- .debug_info    0x0000000000017fb3     0x7195 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
- .debug_info    0x000000000001f148      0x2d2 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/system_ch32v30x.c.obj
- .debug_info    0x000000000001f41a      0xc4c CMakeFiles/CH32V307WCU6.elf.dir/User/main.c.obj
+ .debug_info    0x0000000000008864     0x2b36 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/HardWare.c.obj
+ .debug_info    0x000000000000b39a     0x1234 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/Interrupt.c.obj
+ .debug_info    0x000000000000c5ce     0x5f89 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
+ .debug_info    0x0000000000012557     0x58eb CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
+ .debug_info    0x0000000000017e42     0x7152 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+ .debug_info    0x000000000001ef94      0x2d2 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/system_ch32v30x.c.obj
+ .debug_info    0x000000000001f266      0xc4c CMakeFiles/CH32V307WCU6.elf.dir/User/main.c.obj
 
-.debug_abbrev   0x0000000000000000     0x35e3
+.debug_abbrev   0x0000000000000000     0x35f5
  .debug_abbrev  0x0000000000000000      0x234 CMakeFiles/CH32V307WCU6.elf.dir/Debug/debug.c.obj
  .debug_abbrev  0x0000000000000234      0x215 CMakeFiles/CH32V307WCU6.elf.dir/Peripheral/src/ch32v30x_adc.c.obj
  .debug_abbrev  0x0000000000000449      0x273 CMakeFiles/CH32V307WCU6.elf.dir/Peripheral/src/ch32v30x_can.c.obj
@@ -2594,13 +2577,13 @@ OUTPUT(CH32V307WCU6.elf elf32-littleriscv)
  .debug_abbrev  0x0000000000001477       0x12 CMakeFiles/CH32V307WCU6.elf.dir/Startup/startup_ch32v30x_D8C.S.obj
  .debug_abbrev  0x0000000000001489      0x337 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/HardWare.c.obj
  .debug_abbrev  0x00000000000017c0      0x2c4 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/Interrupt.c.obj
- .debug_abbrev  0x0000000000001a84      0x6c6 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
- .debug_abbrev  0x000000000000214a      0x677 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
- .debug_abbrev  0x00000000000027c1      0xa3f CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
- .debug_abbrev  0x0000000000003200      0x19b CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/system_ch32v30x.c.obj
- .debug_abbrev  0x000000000000339b      0x248 CMakeFiles/CH32V307WCU6.elf.dir/User/main.c.obj
+ .debug_abbrev  0x0000000000001a84      0x6c8 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
+ .debug_abbrev  0x000000000000214c      0x677 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
+ .debug_abbrev  0x00000000000027c3      0xa4f CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+ .debug_abbrev  0x0000000000003212      0x19b CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/system_ch32v30x.c.obj
+ .debug_abbrev  0x00000000000033ad      0x248 CMakeFiles/CH32V307WCU6.elf.dir/User/main.c.obj
 
-.debug_loc      0x0000000000000000     0x72d7
+.debug_loc      0x0000000000000000     0x7250
  .debug_loc     0x0000000000000000       0x46 CMakeFiles/CH32V307WCU6.elf.dir/Debug/debug.c.obj
  .debug_loc     0x0000000000000046      0xaf3 CMakeFiles/CH32V307WCU6.elf.dir/Peripheral/src/ch32v30x_adc.c.obj
  .debug_loc     0x0000000000000b39      0xd6b CMakeFiles/CH32V307WCU6.elf.dir/Peripheral/src/ch32v30x_can.c.obj
@@ -2611,12 +2594,12 @@ OUTPUT(CH32V307WCU6.elf elf32-littleriscv)
  .debug_loc     0x000000000000471b      0x2a8 CMakeFiles/CH32V307WCU6.elf.dir/Peripheral/src/ch32v30x_usbfs_device.c.obj
  .debug_loc     0x00000000000049c3       0x61 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/HardWare.c.obj
  .debug_loc     0x0000000000004a24      0x20b CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/Interrupt.c.obj
- .debug_loc     0x0000000000004c2f      0x67f CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
- .debug_loc     0x00000000000052ae       0x83 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
- .debug_loc     0x0000000000005331     0x1e8c CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
- .debug_loc     0x00000000000071bd      0x11a CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/system_ch32v30x.c.obj
+ .debug_loc     0x0000000000004c2f      0x6c7 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
+ .debug_loc     0x00000000000052f6       0x83 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
+ .debug_loc     0x0000000000005379     0x1dbd CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+ .debug_loc     0x0000000000007136      0x11a CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/system_ch32v30x.c.obj
 
-.debug_aranges  0x0000000000000000      0xa58
+.debug_aranges  0x0000000000000000      0xa50
  .debug_aranges
                 0x0000000000000000       0x30 CMakeFiles/CH32V307WCU6.elf.dir/Debug/debug.c.obj
  .debug_aranges
@@ -2642,17 +2625,17 @@ OUTPUT(CH32V307WCU6.elf elf32-littleriscv)
  .debug_aranges
                 0x00000000000008b8       0x38 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/Interrupt.c.obj
  .debug_aranges
-                0x00000000000008f0       0x38 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
+                0x00000000000008f0       0x30 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
  .debug_aranges
-                0x0000000000000928       0x38 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
+                0x0000000000000920       0x38 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
  .debug_aranges
-                0x0000000000000960       0xa0 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+                0x0000000000000958       0xa0 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
  .debug_aranges
-                0x0000000000000a00       0x38 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/system_ch32v30x.c.obj
+                0x00000000000009f8       0x38 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/system_ch32v30x.c.obj
  .debug_aranges
-                0x0000000000000a38       0x20 CMakeFiles/CH32V307WCU6.elf.dir/User/main.c.obj
+                0x0000000000000a30       0x20 CMakeFiles/CH32V307WCU6.elf.dir/User/main.c.obj
 
-.debug_ranges   0x0000000000000000      0xaf8
+.debug_ranges   0x0000000000000000      0xaa0
  .debug_ranges  0x0000000000000000       0x20 CMakeFiles/CH32V307WCU6.elf.dir/Debug/debug.c.obj
  .debug_ranges  0x0000000000000020      0x140 CMakeFiles/CH32V307WCU6.elf.dir/Peripheral/src/ch32v30x_adc.c.obj
  .debug_ranges  0x0000000000000160       0xd0 CMakeFiles/CH32V307WCU6.elf.dir/Peripheral/src/ch32v30x_can.c.obj
@@ -2664,13 +2647,13 @@ OUTPUT(CH32V307WCU6.elf elf32-littleriscv)
  .debug_ranges  0x0000000000000790       0x28 CMakeFiles/CH32V307WCU6.elf.dir/Startup/startup_ch32v30x_D8C.S.obj
  .debug_ranges  0x00000000000007b8       0x50 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/HardWare.c.obj
  .debug_ranges  0x0000000000000808       0x28 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/Interrupt.c.obj
- .debug_ranges  0x0000000000000830       0x98 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
- .debug_ranges  0x00000000000008c8       0x40 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
- .debug_ranges  0x0000000000000908      0x1b8 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
- .debug_ranges  0x0000000000000ac0       0x28 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/system_ch32v30x.c.obj
- .debug_ranges  0x0000000000000ae8       0x10 CMakeFiles/CH32V307WCU6.elf.dir/User/main.c.obj
+ .debug_ranges  0x0000000000000830       0x78 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
+ .debug_ranges  0x00000000000008a8       0x40 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
+ .debug_ranges  0x00000000000008e8      0x180 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+ .debug_ranges  0x0000000000000a68       0x28 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/system_ch32v30x.c.obj
+ .debug_ranges  0x0000000000000a90       0x10 CMakeFiles/CH32V307WCU6.elf.dir/User/main.c.obj
 
-.debug_line     0x0000000000000000    0x14c26
+.debug_line     0x0000000000000000    0x14cca
  .debug_line    0x0000000000000000      0x4ad CMakeFiles/CH32V307WCU6.elf.dir/Debug/debug.c.obj
  .debug_line    0x00000000000004ad     0x17cb CMakeFiles/CH32V307WCU6.elf.dir/Peripheral/src/ch32v30x_adc.c.obj
  .debug_line    0x0000000000001c78     0x1c27 CMakeFiles/CH32V307WCU6.elf.dir/Peripheral/src/ch32v30x_can.c.obj
@@ -2682,14 +2665,14 @@ OUTPUT(CH32V307WCU6.elf elf32-littleriscv)
  .debug_line    0x000000000000a345      0x2f1 CMakeFiles/CH32V307WCU6.elf.dir/Peripheral/src/usb_desc.c.obj
  .debug_line    0x000000000000a636      0x37e CMakeFiles/CH32V307WCU6.elf.dir/Startup/startup_ch32v30x_D8C.S.obj
  .debug_line    0x000000000000a9b4     0x13fd CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/HardWare.c.obj
- .debug_line    0x000000000000bdb1     0x132e CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/Interrupt.c.obj
- .debug_line    0x000000000000d0df     0x1d93 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
- .debug_line    0x000000000000ee72      0xe63 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
- .debug_line    0x000000000000fcd5     0x4357 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
- .debug_line    0x000000000001402c      0x7d0 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/system_ch32v30x.c.obj
- .debug_line    0x00000000000147fc      0x42a CMakeFiles/CH32V307WCU6.elf.dir/User/main.c.obj
+ .debug_line    0x000000000000bdb1     0x12e0 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/Interrupt.c.obj
+ .debug_line    0x000000000000d091     0x1de7 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
+ .debug_line    0x000000000000ee78      0xf4b CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
+ .debug_line    0x000000000000fdc3     0x430d CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+ .debug_line    0x00000000000140d0      0x7d0 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/system_ch32v30x.c.obj
+ .debug_line    0x00000000000148a0      0x42a CMakeFiles/CH32V307WCU6.elf.dir/User/main.c.obj
 
-.debug_str      0x0000000000000000     0xb229
+.debug_str      0x0000000000000000     0xb1b5
  .debug_str     0x0000000000000000      0x5d1 CMakeFiles/CH32V307WCU6.elf.dir/Debug/debug.c.obj
                                         0x670 (size before relaxing)
  .debug_str     0x00000000000005d1      0x60a CMakeFiles/CH32V307WCU6.elf.dir/Peripheral/src/ch32v30x_adc.c.obj
@@ -2714,15 +2697,15 @@ OUTPUT(CH32V307WCU6.elf elf32-littleriscv)
                                        0x1872 (size before relaxing)
  .debug_str     0x00000000000035a4      0x105 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/Interrupt.c.obj
                                        0x106d (size before relaxing)
- .debug_str     0x00000000000036a9     0x70ec CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
-                                       0x7c11 (size before relaxing)
- .debug_str     0x000000000000a795      0x178 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
+ .debug_str     0x00000000000036a9     0x7078 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/RealTime_Run.cpp.obj
+                                       0x7b92 (size before relaxing)
+ .debug_str     0x000000000000a721      0x178 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/app_main.cpp.obj
                                        0x7984 (size before relaxing)
- .debug_str     0x000000000000a90d      0x853 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
+ .debug_str     0x000000000000a899      0x853 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/motor.cpp.obj
                                        0x81d4 (size before relaxing)
- .debug_str     0x000000000000b160       0x92 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/system_ch32v30x.c.obj
+ .debug_str     0x000000000000b0ec       0x92 CMakeFiles/CH32V307WCU6.elf.dir/User/MotorPack/Src/system_ch32v30x.c.obj
                                         0x34f (size before relaxing)
- .debug_str     0x000000000000b1f2       0x37 CMakeFiles/CH32V307WCU6.elf.dir/User/main.c.obj
+ .debug_str     0x000000000000b17e       0x37 CMakeFiles/CH32V307WCU6.elf.dir/User/main.c.obj
                                         0x853 (size before relaxing)
 
 .comment        0x0000000000000000       0x33

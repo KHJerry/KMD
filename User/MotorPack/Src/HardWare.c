@@ -1,10 +1,10 @@
 #include "HardWare.h"
 #include "ch32v30x_gpio.h"
-#define DEADTIME 1
+
+#define DEADTIME 5
 
 void MY_GPIO_Init()
 {
-
     /***********************
      * EN_GATE AND RGB GPIO
      * PE2 -- EN_GATE
@@ -111,6 +111,7 @@ void MY_TIM1_Init(void)
     TIM_CtrlPWMOutputs(TIM1,ENABLE);                            //PWM输出使能
     TIM1->CH4CVR = 1;
 }
+
 void MY_TIM2_Init(void)
 {
     GPIO_InitTypeDef        GPIO_InitStructure;
@@ -332,11 +333,10 @@ void MY_TIM8_Init(void)
     TIM_ITConfig(TIM8, TIM_IT_Update, ENABLE);            //使能更新事件的中断
     TIM_ITConfig(TIM8,TIM8_CC_IRQn,ENABLE);
 
-    while(TIM1->CNT < TPWM - 2){}
+    while(TIM1->CNT != TPWM - 2);
     TIM_Cmd(TIM8,ENABLE);                                       //使能TIM1
     TIM_CtrlPWMOutputs(TIM8,ENABLE);                            //PWM输出使能
     TIM8->CH4CVR = 1;
-
 }
 
 #include "ch32v30x_adc.h"
@@ -362,7 +362,7 @@ void MY_ADC_Init(void) {
      * PC3 -- IC1  -- ADC13
     ********************************/
     GPIO_StructInit(&GPIO_InitStructure);
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3;
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
     GPIO_Init(GPIOC, &GPIO_InitStructure);
 
@@ -375,7 +375,7 @@ void MY_ADC_Init(void) {
      * PA3 -- VREF  -- ADC3
     ********************************/
     GPIO_StructInit(&GPIO_InitStructure);
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3;
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 ;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
     GPIO_Init(GPIOA, &GPIO_InitStructure);
 
@@ -395,14 +395,17 @@ void MY_ADC_Init(void) {
     ADC_Init(ADC1, &ADC_InitStructure);
 
     ADC_InjectedSequencerLengthConfig(ADC1, 3);
-    ADC_InjectedChannelConfig(ADC1, ADC_Channel_11, 1, ADC_SampleTime_28Cycles5);  //IA1
-    ADC_InjectedChannelConfig(ADC1, ADC_Channel_12, 2, ADC_SampleTime_28Cycles5);  //IB1
-    ADC_InjectedChannelConfig(ADC1, ADC_Channel_10, 3, ADC_SampleTime_28Cycles5);  //VBUS
+    ADC_InjectedChannelConfig(ADC1, ADC_Channel_11, 1, ADC_SampleTime_71Cycles5);  //IA1
+    ADC_InjectedChannelConfig(ADC1, ADC_Channel_12, 2, ADC_SampleTime_71Cycles5);  //IB1
+    ADC_InjectedChannelConfig(ADC1, ADC_Channel_10, 3, ADC_SampleTime_71Cycles5);  //IB1
+
+
 
     ADC_ITConfig( ADC1, ADC_IT_JEOC, ENABLE);
     ADC_DMACmd(   ADC1, DISABLE);
     ADC_Cmd(      ADC1, ENABLE);
     ADC_BufferCmd(ADC1,DISABLE);
+
 
     ADC_DeInit(ADC2);
     ADC_InitStructure.ADC_Mode                  = ADC_Mode_Independent;
@@ -410,15 +413,16 @@ void MY_ADC_Init(void) {
     ADC_InitStructure.ADC_ContinuousConvMode    = DISABLE;
     ADC_InitStructure.ADC_ExternalTrigConv      = ADC_ExternalTrigInjecConv_Ext_IT15_TIM8_CC4;
     ADC_InitStructure.ADC_DataAlign             = ADC_DataAlign_Right;
-    ADC_InitStructure.ADC_NbrOfChannel          = 3;
+    ADC_InitStructure.ADC_NbrOfChannel          = 2;
     ADC_InitStructure.ADC_OutputBuffer          = ADC_OutputBuffer_Disable;
     ADC_InitStructure.ADC_Pga                   = ADC_Pga_1;
+
 
     ADC_Init(ADC2, &ADC_InitStructure);
 
     ADC_InjectedSequencerLengthConfig(ADC2, 2);
-    ADC_InjectedChannelConfig(ADC2, ADC_Channel_0,  1, ADC_SampleTime_28Cycles5);   //IA2
-    ADC_InjectedChannelConfig(ADC2, ADC_Channel_1,  2, ADC_SampleTime_28Cycles5);   //IB2
+    ADC_InjectedChannelConfig(ADC2, ADC_Channel_0,  1, ADC_SampleTime_71Cycles5);   //IA2
+    ADC_InjectedChannelConfig(ADC2, ADC_Channel_1,  2, ADC_SampleTime_71Cycles5);   //IB2
 
     ADC_ITConfig( ADC2, ADC_IT_JEOC, ENABLE);
     ADC_DMACmd(   ADC2, DISABLE);

@@ -1,11 +1,11 @@
 #ifndef __MOTOR_HPP
 #define __MOTOR_HPP
 
-#define TPWM                   144000000.f / 25000.f / 2.f
+#define TPWM                   144000000.0f / 25000.0f / 2.0f
 #define one_by_sqrt3           0.57735026919F
 #define two_by_sqrt3           1.15470053838F
 #define sqrt3_by_2             0.86602540378F
-#define current_meas_period    0.00004f
+#define current_meas_period    (0.00004f*2.f)
 
 #define ABS(X) (X) < 0 ? -(X) : (X)
 
