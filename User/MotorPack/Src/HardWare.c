@@ -348,11 +348,11 @@ void MY_ADC_Init(void) {
     GPIO_InitTypeDef GPIO_InitStructure;
 
     //频率设置
-    RCC_ADCCLKConfig(RCC_PCLK2_Div4);//ADC时钟为PCLK2的八分频
+    RCC_ADCCLKConfig(RCC_PCLK2_Div8);//ADC时钟为PCLK2的八分频
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC | RCC_APB2Periph_GPIOA | RCC_APB2Periph_AFIO | RCC_APB2Periph_ADC1 |RCC_APB2Periph_ADC2, ENABLE);
 
     //关闭内部温度ADC
-    ADC_TempSensorVrefintCmd(DISABLE);
+    //ADC_TempSensorVrefintCmd(DISABLE);
     /******************************
      * 母线电压采样(过压保护 && 低压保护)
      * 三相电流采样

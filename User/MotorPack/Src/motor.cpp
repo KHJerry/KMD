@@ -94,7 +94,7 @@ void Motor::Init(TIM_TypeDef *tD, TIM_TypeDef *tE)
     this->inductance                                = 0.0f;
 
     //Current CloseLoop Parameters
-    this->effective_current_limit                   = 20.5f;
+    this->effective_current_limit                   = 15.5f;
     this->pi_gains                                  = {0,0};
     this->I_measured_report_filter_k_               = 1.0f;
     this->Id_measured_                              = 0;
@@ -126,7 +126,7 @@ void Motor::Init(TIM_TypeDef *tD, TIM_TypeDef *tE)
     this->torque_limit_                             = 1.05F;     //Nm
     this->torque_setpoint_                          = 0.0f;
     this->torque_setpoint_src                       = 0;
-    this->torque_constant_                          = 0.05F;    //Nm/A
+    this->torque_constant_                          = 0.1F;    //Nm/A
     this->torque_output_                            = 0;
     this->ibus = 0;
 
@@ -399,8 +399,9 @@ void Motor::get_alpha_beta_output(uint32_t timestamp, Motor::float2D *mod_alpha_
 
 
     //get Idq's errors
-    Ierr_d = Idq_setpoint_.first  - Idq.first;
-    Ierr_q = Idq_setpoint_.second - Idq.second;
+
+    Ierr_d = Idq_setpoint_.first  - Id_measured_;
+    Ierr_q = Idq_setpoint_.second - Iq_measured_;
 
     mod_d = V_to_mod * (Vdq_setpoint_.first  + v_current_control_integral_d_ + Ierr_d * pi_gains.first);
     mod_q = V_to_mod * (Vdq_setpoint_.second + v_current_control_integral_q_ + Ierr_q * pi_gains.first);
@@ -463,13 +464,10 @@ void Motor::velovityLoop(uint32_t timestamp)
 
     //限制力矩
     bool limit = false;
-    if(this->timer_driver_ == TIM1){
-        torque = torque > 0 ? 0 : torque;
-        torque = torque < -torque_limit_ ? -torque_limit_ : torque;
-    }else{
-        torque = torque > torque_limit_ ? torque_limit_ : torque;
-        torque = torque <0 ? 0 : torque;
-    }
+
+    torque = torque < -torque_limit_ ? -torque_limit_ : torque;
+    torque = torque > torque_limit_  ? torque_limit_ : torque;
+
     if(torque == torque_limit_ || torque == -torque_limit_) limit = true;
 
     if(limit) vel_integrator_torque_*=0.99f;

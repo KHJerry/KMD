@@ -39,7 +39,7 @@ void app_main()
     motor2.pll_ki_             = 0.25f * ( motor2.pll_kp_ *  motor2.pll_kp_);
     motor2.K_current           = 1.0f;
 
-    motor1.effective_current_limit = 15.5f;
+    motor1.effective_current_limit = 10.5f;
     motor2.effective_current_limit = 15.5f;
 
     motor1.vel_setpoint_ = 0;
@@ -99,7 +99,7 @@ void app_main()
                 if(!motor1.e_config_.is_ready_ && !motor2.e_config_.is_ready_){
                     motor1.openloop_Vdq.first  = 0;motor1.openloop_Vdq.second = 0.5;
                     motor2.openloop_Vdq.first  = 0;motor2.openloop_Vdq.second = 0.5;
-                    Delay_Ms(2000);
+                    while(1)Delay_Ms(2000);
                 }
 
                 if(!motor1.e_config_.is_ready_ && (( motor1.phase_vel_ > 0 && motor1.e_config_.direction == 1) || (motor1.phase_vel_ < 0 && motor1.e_config_.direction == -1))){
@@ -130,71 +130,20 @@ void app_main()
                 motor1.NowState = Motor::STATE_CLOSELOOP;
                 motor2.NowState = Motor::STATE_CLOSELOOP;
 
-//                motor1.vel_setpoint_= -200.f;
-//                motor2.vel_setpoint_= -200.f;
-//                Delay_Ms(500);
-//                motor1.vel_setpoint_= 1.f;
-//                motor2.vel_setpoint_= 1.f;
-//                Delay_Ms(500);
+//                motor2.vel_setpoint_=250.0f;
+//                Delay_Ms(1000);
+//                motor2.vel_setpoint_=0;
+//                Delay_Ms(1000);
+//                motor1.vel_setpoint_=-250.00f;
+//                Delay_Ms(1000);
+//                motor1.vel_setpoint_=0;
+//                Delay_Ms(1000);
+
+//                motor2.torque_setpoint_src=0.35f;   Delay_Ms(1000);
+//                motor2.torque_setpoint_src=0;       Delay_Ms(1000);
 //
-//                if(motor1.s_set_vel!=0 && motor2.s_set_vel !=0)
-//                {
-//                   motor2.set_vel+=0.05f;
-//                   motor1.set_vel-=0.05f;
-//                   if(motor2.set_vel>= motor2.s_set_vel)motor2.set_vel = motor2.s_set_vel;
-//                   if(motor1.set_vel<=-motor1.s_set_vel)motor1.set_vel =-motor1.s_set_vel;
-//                }else{
-//                    motor2.set_vel = motor2.s_set_vel;
-//                    motor1.set_vel =-motor1.s_set_vel;
-//                }
-
-                motor2.set_vel=250.0f;
-                //motor2.torque_setpoint_src = 15.5f;
-                Delay_Ms(1000);
-                motor2.set_vel=0;
-                //motor2.torque_setpoint_src = 0.0f;
-                Delay_Ms(1000);
-                motor1.set_vel=-250.00f;
-                Delay_Ms(1000);
-                motor1.set_vel=0;
-                Delay_Ms(1000);
-
-//                motor1.torque_setpoint_src =-1.05f;
-//                motor2.torque_setpoint_src = 1.05f;
-//                Delay_Ms(1000);
-//                motor1.torque_setpoint_src=0.0f;
-//                motor2.torque_setpoint_src=0.0f;
-//                Delay_Ms(1000);
-
-
-//                motor1.set_vel-=0.05f;
-//                if(motor2.set_vel>= motor2.s_set_vel)motor2.set_vel = motor2.s_set_vel;
-//                if(motor1.set_vel<=-motor1.s_set_vel)motor1.set_vel =-motor1.s_set_vel;
-
-//                Delay_Ms(1000);
-//                motor1.set_vel = -100;
-//                Delay_Ms(1000);
-//                motor1.set_vel = -200;
-//                Delay_Ms(1000);
-//                motor1.set_vel = -50;
-//                Delay_Ms(1000);
-//                motor1.set_vel = -200;
-//                Delay_Ms(1000);
-//                motor1.set_vel = 0;
-//                Delay_Ms(1000);
-//
-//                motor1.set_vel = 210;
-//                Delay_Ms(1000);
-//                motor1.set_vel = 100;
-//                Delay_Ms(1000);
-//                motor1.set_vel = 210;
-//                Delay_Ms(1000);
-//                motor1.set_vel = 50;
-//                Delay_Ms(1000);
-//                motor1.set_vel = 210;
-//                Delay_Ms(1000);
-//                motor1.set_vel = 0;
-//                Delay_Ms(1000);
+//                motor1.torque_setpoint_src=-0.35f;  Delay_Ms(1000);
+//                motor1.torque_setpoint_src=0;       Delay_Ms(1000);
             }
         }
         Delay_Ms(1);

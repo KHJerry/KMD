@@ -980,15 +980,6 @@ void ADC_TempSensorVrefintCmd(FunctionalState NewState)
     {
         ADC2->CTLR2 &= CTLR2_TSVREFE_Reset;
     }
-
-//    if(NewState != DISABLE)
-//    {
-//        ADC1->CTLR2 |= CTLR2_TSVREFE_Set;
-//    }
-//    else
-//    {
-//        ADC1->CTLR2 &= CTLR2_TSVREFE_Reset;
-//    }
 }
 
 /*********************************************************************

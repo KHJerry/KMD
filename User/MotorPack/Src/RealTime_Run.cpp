@@ -20,8 +20,6 @@ extern "C"{
 #endif
 
 void ADC1_2_IRQHandler(void)            __attribute__((interrupt("WCH-Interrupt-fast")));
-void TIM1_UP_IRQHandler(void)           __attribute__((interrupt("WCH-Interrupt-fast")));
-void TIM8_UP_IRQHandler(void)           __attribute__((interrupt("WCH-Interrupt-fast")));
 void TIM4_IRQHandler(void)              __attribute__((interrupt("WCH-Interrupt-fast")));
 void USB_LP_CAN1_RX0_IRQHandler(void)   __attribute__((interrupt("WCH-Interrupt-fast")));
 
@@ -41,6 +39,25 @@ extern "C"{
 #endif
     //C代码区域
     void ADC1_2_IRQHandler(void) {
+        vofa_float[0]    = motor1.vbus_measure;
+        vofa_float[1]    = motor1.currents.phA;
+        vofa_float[2]    = motor1.currents.phB;
+        vofa_float[3]    = motor1.currents.phC;
+        vofa_float[4]    = motor1.mod_d;
+        vofa_float[5]    = motor1.mod_q;
+        vofa_float[6]    = motor1.vel_estimate_;
+        vofa_float[7]    = motor2.vbus_measure;
+        vofa_float[8]    = motor2.currents.phA;
+        vofa_float[9]    = motor1.currents.phB;
+        vofa_float[10]   = motor1.currents.phC;
+        vofa_float[11]   = motor2.mod_d;
+        vofa_float[12]   = motor2.mod_q;
+        vofa_float[13]   = motor2.vel_estimate_;
+
+        memcpy(vofa_data,(uint8_t*)vofa_float,sizeof(vofa_float));
+        vofa_data[58] = 0X80;
+        vofa_data[59] = 0X7F;
+        USBFS_Endp_DataUp(DEF_UEP3,vofa_data,60,DEF_UEP_DMA_LOAD);
 
         if (ADC_GetFlagStatus(ADC1, ADC_FLAG_JEOC)) {
             if(TIM1->CH4CVR == 1)
@@ -158,61 +175,6 @@ extern "C"{
 
         if(TIM_GetFlagStatus(TIM4,TIM_FLAG_Update))
         {
-            if(motor2.set_vel > 0){
-                if(motor2.set_vel < motor2.vel_setpoint_){
-                    motor2.vel_setpoint_-=Acc;
-                }else if(motor2.set_vel >= motor2.vel_setpoint_){
-                    motor2.vel_setpoint_+= Acc;
-                }
-            }else if(motor2.set_vel < 0){
-                if(motor2.set_vel > motor2.vel_setpoint_){
-                    motor2.vel_setpoint_+=Acc;
-                }else if(motor2.set_vel <= motor2.vel_setpoint_){
-                    motor2.vel_setpoint_-=Acc;
-                }
-            }else{
-                if(motor2.vel_setpoint_>0)      motor2.vel_setpoint_-=Acc;
-                else if(motor2.vel_setpoint_<0) motor2.vel_setpoint_+=Acc;
-                else                            motor2.vel_setpoint_=0;
-            }
-
-            if(motor1.set_vel > 0){
-                if(motor1.set_vel < motor1.vel_setpoint_){
-                    motor1.vel_setpoint_-=Acc;
-                }else if(motor1.set_vel >= motor1.vel_setpoint_){
-                    motor1.vel_setpoint_+=Acc;
-                }
-            }else if(motor1.set_vel < 0){
-                if(motor1.set_vel > motor1.vel_setpoint_){
-                    motor1.vel_setpoint_+=Acc;
-                }else if(motor1.set_vel <= motor1.vel_setpoint_){
-                    motor1.vel_setpoint_-=Acc;
-                }
-            }else{
-                if(motor1.vel_setpoint_>0)      motor1.vel_setpoint_-=Acc;
-                else if(motor1.vel_setpoint_<0) motor1.vel_setpoint_+=Acc;
-                else                            motor1.vel_setpoint_=0;
-            }
-
-            vofa_float[0]    = motor1.vbus_measure;
-            vofa_float[1]    = motor1.currents.phA;
-            vofa_float[2]    = motor1.currents.phB;
-            vofa_float[3]    = motor1.currents.phC;
-            vofa_float[4]    = motor1.Idq_setpoint_.second;
-            vofa_float[5]    = motor1.torque_setpoint_src;
-            vofa_float[6]    = motor1.vel_estimate_;
-            vofa_float[7]    = motor2.vbus_measure;
-            vofa_float[8]    = motor2.currents.phA;
-            vofa_float[9]    = motor2.currents.phB;
-            vofa_float[10]   = motor2.currents.phC;
-            vofa_float[11]   = motor2.Idq_setpoint_.second;
-            vofa_float[12]   = motor2.torque_setpoint_src;
-            vofa_float[13]   = motor2.vel_estimate_;
-
-            memcpy(vofa_data,(uint8_t*)vofa_float,sizeof(vofa_float));
-            vofa_data[58] = 0X80;
-            vofa_data[59] = 0X7F;
-            USBFS_Endp_DataUp(DEF_UEP3,vofa_data,60,DEF_UEP_DMA_LOAD);
             TIM_ClearFlag(TIM4,TIM_FLAG_Update);
         }
     }
@@ -223,23 +185,25 @@ extern "C"{
         if( CAN_GetITStatus( CAN1, CAN_IT_FMP0 ) != RESET )
         {
             CAN_Receive(CAN1,CAN_FIFO0,&CanRxStructure);
-            if(CanRxStructure.StdId == 0X001)
+            if(CanRxStructure.StdId == 0X002)
             {
                 float spd1 = CanRxStructure.Data[1];
                 float spd2 = CanRxStructure.Data[3];
 
-                if(CanRxStructure.Data[0] == 0)
+                if(CanRxStructure.Data[0] == 1)
                 {
                     spd1*=-1;
                 }
 
-                if(CanRxStructure.Data[2] == 1)
+                if(CanRxStructure.Data[2] == 0)
                 {
                     spd2*=-1;
                 }
 
-                motor1.set_vel = spd1;
-                motor2.set_vel = spd2;
+//                motor1.vel_setpoint_ = spd1;
+//                motor2.vel_setpoint_ = spd2;
+                motor1.torque_setpoint_src = (1.05f / 255.f)*spd1;
+                motor2.torque_setpoint_src = (1.50f / 255.f)*spd2;
             }
 
         }
