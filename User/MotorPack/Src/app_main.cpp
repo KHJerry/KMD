@@ -1,122 +1,112 @@
 #include "motor.h"
 #include "debug.h"
+#include "ch32v30x_usart.h"
+
+extern "C" {
+#include "SMO.h"
+};
 #define T_speed 130
-Motor motor1,motor2;
+
+Motor motor;
 Motor::RunState SelectState = Motor::STATE_RESISTANCE_CALIBRATION;
 uint8_t CAN_Status;
+uint8_t direction = 0;
 
 void app_main()
 {
-    motor1.Init(TIM1,TIM2);
-    motor2.Init(TIM8,TIM3);
+    motor.Init(TIM1,TIM3);
 
-    motor1.vel_gain_                                 = 0.1f / 2.f;
-    motor1.vel_integrator_gain_                      = 50.f*motor1.vel_gain_;
-    motor1.m_config_.current_control_bandwidth       = 1500;
+    motor.vel_gain_                                 = 0.1f / 2.f;
+    motor.vel_integrator_gain_                      = 50.f*motor.vel_gain_;
+    motor.m_config_.current_control_bandwidth       = 1000;
 
-    motor2.vel_gain_                                 = 0.1f / 2.f;
-    motor2.vel_integrator_gain_                      = 50.f*motor2.vel_gain_;
-    motor2.m_config_.current_control_bandwidth       = 1500;
 
-    motor1.K_current = 1.0f;
-    motor2.K_current = 1.0f;
+    motor.K_current = 1.0f;
 
-//    motor1.vel_gain_                                 = 0.06f/2.0f;
-//    motor1.vel_integrator_gain_                      = 30.f*motor1.vel_gain_;
-//    motor1.m_config_.current_control_bandwidth       = 1000;
-//
-//    motor2.vel_gain_                                 = 0.06f/2.0f;
-//    motor2.vel_integrator_gain_                      = 30.f*motor2.vel_gain_;
-//    motor2.m_config_.current_control_bandwidth       = 1000;
+    motor.e_config_.bandwidth = 1000;
+    motor.pll_kp_             =  motor.e_config_.bandwidth * 2.f;
+    motor.pll_ki_             = 0.25f * ( motor.pll_kp_ *  motor.pll_kp_);
+    motor.K_current           = 1.0f;
 
-    motor1.e_config_.bandwidth = 1000;
-    motor1.pll_kp_             =  motor1.e_config_.bandwidth * 2.f;
-    motor1.pll_ki_             = 0.25f * ( motor1.pll_kp_ *  motor1.pll_kp_);
-    motor1.K_current           = 1.0f;
+    motor.effective_current_limit = 13.5f;
 
-    motor2.e_config_.bandwidth = 1000;
-    motor2.pll_kp_             =  motor2.e_config_.bandwidth * 2.f;
-    motor2.pll_ki_             = 0.25f * ( motor2.pll_kp_ *  motor2.pll_kp_);
-    motor2.K_current           = 1.0f;
+    motor.vel_setpoint_ = 0;
 
-    motor1.effective_current_limit = 10.5f;
-    motor2.effective_current_limit = 15.5f;
+    motor.pos_gain = 15;
 
-    motor1.vel_setpoint_ = 0;
-    motor2.vel_setpoint_ = 0;
+    motor.start();
 
-    motor1.s_set_vel = 210;
-    motor2.s_set_vel = 210;
+    while(motor.vbus_measure < 8.f) {
+        Delay_Ms(1);
+    }
 
-    motor1.start();
-    motor2.start();
-
-    float vel1 = 0,vel2=0;
     for(;;)
     {
         static uint8_t arr[8] = {0,0,0,0,0,0,0,0};
 
         switch (SelectState) {
             case Motor::STATE_NONE:{
-                motor1.NowState = Motor::STATE_NONE;
-                motor2.NowState = Motor::STATE_NONE;
+                motor.NowState = Motor::STATE_NONE;
             }break;
 
 
             case Motor::STATE_RESISTANCE_CALIBRATION:{
 
-                motor1.NowState = Motor::STATE_RESISTANCE_CALIBRATION;
-                motor2.NowState = Motor::STATE_RESISTANCE_CALIBRATION;
+                motor.NowState = Motor::STATE_RESISTANCE_CALIBRATION;
                 Delay_Ms(1500);
 
-                motor1.getResistance();
-                motor2.getResistance();
-                motor2.resistance = motor1.resistance;
+                motor.getResistance();
 
-                motor1.update_current_controller_gains();
-                motor2.update_current_controller_gains();
-                SelectState = Motor::STATE_INDUCTANCE_CALIBRATION;
+                motor.resistance = 11.9000f;
+                motor.inductance = 0.01003f;
+                motor.e_config_.direction =1;
+
+                motor.update_current_controller_gains();
+                SelectState = Motor::STATE_CLOSELOOP;
             }break;
 
             case Motor::STATE_INDUCTANCE_CALIBRATION:{
-                motor1.NowState = Motor::STATE_INDUCTANCE_CALIBRATION;
-                motor2.NowState = Motor::STATE_INDUCTANCE_CALIBRATION;
+                motor.NowState = Motor::STATE_INDUCTANCE_CALIBRATION;
                 Delay_Ms(1500);
-                motor1.getInductance();
-                motor2.getInductance();
-                motor2.inductance = motor1.inductance;
+                motor.getInductance();
 
-                motor1.update_current_controller_gains();
-                motor2.update_current_controller_gains();
+//                SMO_MotorPare.Rs = motor.resistance;
+//                SMO_MotorPare.Ls = motor.inductance;
+//                SMO_MotorPare.Ib = 25;
+//                SMO_MotorPare.Vb = 16.8f*0.57735f;
+//                SMO_MotorPare.Ts = 0.00008f;
+//                SMO_MotorPare.POLES = 7;
+//                SMO_MotorPare.Fsmopos = exp((-SMO_MotorPare.Rs/SMO_MotorPare.Ls)*(SMO_MotorPare.Ts));
+//                SMO_MotorPare.Gsmopos = (SMO_MotorPare.Vb/SMO_MotorPare.Ib)*(1/SMO_MotorPare.Rs)*(1-SMO_MotorPare.Fsmopos);
+//
+//                Angle_SMOPare.Fsmopos = SMO_MotorPare.Fsmopos ;
+//                Angle_SMOPare.Gsmopos = SMO_MotorPare.Gsmopos ;
+//                Angle_SMOPare.Kslide  = 0.1f;    //
+//                Angle_SMOPare.Kslf    = 0.01f;    //
+//                Angle_SMOPare.E0      = 0.5f;    //  标幺值1的一半
+//                Speed_estPare.speed_coeff=(float)(500*60/(SMO_MotorPare.POLES*4096.0f));  //  1.831054463982609
+
+
+                motor.update_current_controller_gains();
 
                 SelectState = Motor::STATE_ENCODER_CALIBRATION;
             }break;
 
             case Motor::STATE_ENCODER_CALIBRATION:{
-                motor1.NowState = Motor::STATE_ENCODER_CALIBRATION;
-                motor2.NowState = Motor::STATE_ENCODER_CALIBRATION;
+                motor.NowState = Motor::STATE_ENCODER_CALIBRATION;
 
-                if(!motor1.e_config_.is_ready_ && !motor2.e_config_.is_ready_){
-                    motor1.openloop_Vdq.first  = 0;motor1.openloop_Vdq.second = 0.5;
-                    motor2.openloop_Vdq.first  = 0;motor2.openloop_Vdq.second = 0.5;
-                    while(1)Delay_Ms(2000);
+                if(!motor.e_config_.is_ready_){
+                    motor.openloop_Vdq.first  = 0;motor.openloop_Vdq.second = 5.0f;
+                    Delay_Ms(2000);
                 }
 
-                if(!motor1.e_config_.is_ready_ && (( motor1.phase_vel_ > 0 && motor1.e_config_.direction == 1) || (motor1.phase_vel_ < 0 && motor1.e_config_.direction == -1))){
-                    motor1.e_config_.is_ready_ = true;
-                }else if(!motor1.e_config_.is_ready_){
-                    motor1.e_config_.direction = -motor1.e_config_.direction;
+                if(!motor.e_config_.is_ready_ && (( motor.phase_vel_ > 0 && motor.e_config_.direction == 1) || (motor.phase_vel_ < 0 && motor.e_config_.direction == -1))){
+                    motor.e_config_.is_ready_ = true;
+                }else if(!motor.e_config_.is_ready_){
+                    motor.e_config_.direction = -motor.e_config_.direction;
                 }
 
-                if(!motor2.e_config_.is_ready_ && (( motor2.phase_vel_ > 0 && motor2.e_config_.direction == 1) || (motor2.phase_vel_ < 0 && motor2.e_config_.direction == -1))){
-                    motor2.e_config_.is_ready_ = true;
-                }else if(!motor2.e_config_.is_ready_){
-                    motor2.e_config_.direction = -motor2.e_config_.direction;
-                }
-
-
-                motor1.openloop_Vdq.first  = 0;motor1.openloop_Vdq.second = 0;
-                motor2.openloop_Vdq.first  = 0;motor2.openloop_Vdq.second = 0;
+                motor.openloop_Vdq.first  = 0;motor.openloop_Vdq.second = 0;
 
                 Delay_Ms(200);
 
@@ -124,27 +114,11 @@ void app_main()
             }break;
 
             case Motor::STATE_CLOSELOOP:{
-                motor1.ctrlMode = Motor::CTRL_VEL;
-                motor2.ctrlMode = Motor::CTRL_VEL;
-
-                motor1.NowState = Motor::STATE_CLOSELOOP;
-                motor2.NowState = Motor::STATE_CLOSELOOP;
-
-//                motor2.vel_setpoint_=250.0f;
-//                Delay_Ms(1000);
-//                motor2.vel_setpoint_=0;
-//                Delay_Ms(1000);
-//                motor1.vel_setpoint_=-250.00f;
-//                Delay_Ms(1000);
-//                motor1.vel_setpoint_=0;
-//                Delay_Ms(1000);
-
-//                motor2.torque_setpoint_src=0.35f;   Delay_Ms(1000);
-//                motor2.torque_setpoint_src=0;       Delay_Ms(1000);
-//
-//                motor1.torque_setpoint_src=-0.35f;  Delay_Ms(1000);
-//                motor1.torque_setpoint_src=0;       Delay_Ms(1000);
+                motor.ctrlMode = Motor::CTRL_POS;
+                motor.NowState = Motor::STATE_CLOSELOOP;
             }
+            motor.pos_setpoint += 0.5f;
+            Delay_Ms(500);
         }
         Delay_Ms(1);
     }

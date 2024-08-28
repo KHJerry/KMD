@@ -8,7 +8,7 @@ void Motor::Init(TIM_TypeDef *tD, TIM_TypeDef *tE)
     this->timer_encoder_= tE;
 
     this->m_config_.pre_calibrated                  = false;
-    this->m_config_.pole_pairs                      = 7;
+    this->m_config_.pole_pairs                      = 14;
     this->m_config_.calibration_current             = 10.0f;
     this->m_config_.resistance_calib_max_voltage    = 2.0f;
     this->m_config_.phase_inductance                = 0.0f;
@@ -41,7 +41,7 @@ void Motor::Init(TIM_TypeDef *tD, TIM_TypeDef *tE)
     this->e_config_.bandwidth                       = 1000.0f;
     this->e_config_.phase_offset                    = 0;
     this->e_config_.phase_offset_float              = 0.0f;
-    this->e_config_.cpr                             = (1023);
+    this->e_config_.cpr                             = (4096);
     this->e_config_.index_offset                    = 0.0f;
     this->e_config_.use_index                       = false;
     this->e_config_.pre_calibrated                  = false;
@@ -94,7 +94,7 @@ void Motor::Init(TIM_TypeDef *tD, TIM_TypeDef *tE)
     this->inductance                                = 0.0f;
 
     //Current CloseLoop Parameters
-    this->effective_current_limit                   = 15.5f;
+    this->effective_current_limit                   = 1.5f;
     this->pi_gains                                  = {0,0};
     this->I_measured_report_filter_k_               = 1.0f;
     this->Id_measured_                              = 0;
@@ -110,25 +110,29 @@ void Motor::Init(TIM_TypeDef *tD, TIM_TypeDef *tE)
 
 
     //Velocity Controller
-    this->vel_limit                                 = 255.0f;
+    this->vel_limit                                 = 300.0f;
     this->vel_setpoint_                             = 0.f;
     this->vel_gain_                                 = 1/12.f;
     this->vel_integrator_gain_                      = this->vel_gain_*5;
-    this->vel_integrator_torque_                    = 0.0f;
+    this->vel_integrator_torque1_                    = 0.0f;
+    this->vel_integrator_torque2_                    = 0.0f;
     this->vel_integrator_limit_                     = 50.0f;
 
     //Position Controller
     this->pos_setpoint                              = 0.f;
-    this->pos_gain                                  = 0.f;
+    this->pos_gain                                  = 10.f;
     this->pos_err                                   = 0.f;
 
     //Torque Controller
     this->torque_limit_                             = 1.05F;     //Nm
     this->torque_setpoint_                          = 0.0f;
     this->torque_setpoint_src                       = 0;
-    this->torque_constant_                          = 0.1F;    //Nm/A
+    this->torque_constant_                          = 0.05F;    //Nm/A
     this->torque_output_                            = 0;
     this->ibus = 0;
+    this->pos_last_time_stamp_                      = 0;
+
+    this->enable_oberver = false;
 
     Motor::vbus_measure = 16.8;
 
@@ -138,16 +142,8 @@ void Motor::Init(TIM_TypeDef *tD, TIM_TypeDef *tE)
 
 void Motor::start()
 {
-    if(timer_driver_ == TIM1)
-    {
-        ADC_ExternalTrigInjectedConvCmd(ADC1,ENABLE);           //使能外部事件启动注入转换
-    }
-    else if(timer_driver_ == TIM8)
-    {
-        ADC_ExternalTrigInjectedConvCmd(ADC2,ENABLE);           //使能外部事件启动注入转换
-        EN_GATE(1);
-
-    }
+    ADC_ExternalTrigInjectedConvCmd(ADC1,ENABLE);           //使能外部事件启动注入转换
+    EN_GATE(1);
 }
 
 void Motor::apply_pwm_timings()
@@ -171,23 +167,17 @@ void Motor::measure_currents(uint16_t c1, uint16_t c2, uint16_t c3)
     mod_to_V = (2.f/3.f) * vbus_measure;
     V_to_mod = 1.f / mod_to_V;
 
-
-    currents.phA = -this->K_current*((float(ia_half_word   - ref_value[0])   / 4096.f) * 3.3f / 20.f / 0.001f);
-    currents.phB = -this->K_current*((float(ib_half_word   - ref_value[1])   / 4096.f) * 3.3f / 20.f / 0.001f);
-//    currents.phC = this->K_current*((float(ic_half_word   - ref_value[2])   / 4096.f) * 3.3f / 20.f / 0.001f);
-    currents.phC = -currents.phA - currents.phB;
-//    currents.phC = -currents.phA-currents.phB;
-
-//    currents.phA = ia_half_word;
-//    currents.phB = ib_half_word;
-//    currents.phC = ic_half_word;
+    currents.phA = -this->K_current*((float(ia_half_word   - ref_value[0])   / 4096.f) * 3.32f / 10.f / 0.001f);
+    currents.phB = -this->K_current*((float(ib_half_word   - ref_value[1])   / 4096.f) * 3.32f / 10.f / 0.001f);
+    currents.phC = -this->K_current*((float(ic_half_word   - ref_value[2])   / 4096.f) * 3.32f / 10.f / 0.001f);
+    motor.ibus = (((mod_d*Id_measured_+mod_q*Iq_measured_))*0.666667f)/0.627906f;
 }
 
 void Motor::measureResistance()
 {
     actual_current_ = I_alpha_beta_.first;
     //test_voltage_R += kI * current_meas_period * (target_current_ - actual_current_);
-    test_voltage_R = 0.5;
+    test_voltage_R = 5.0;
     //I_beta_ += (kIBetaFilt *current_meas_period) * (I_alpha_beta_.second - I_beta_);
 
     //if(test_voltage_R > max_voltage_) test_voltage_R = max_voltage_;
@@ -204,9 +194,6 @@ void Motor::getResistance()
 
     this->timer_encoder_->CNT = 0;
     this->pos_cpr_counts_=0;
-    this->pos_circular_ = 0;
-    this->pos_estimate_counts_=0;
-    this->pos_estimate_ = 0;
     this->phase_ = 0;
     this->phase_vel_ = 0;
 }
@@ -240,9 +227,9 @@ void Motor::getInductance()
 
 void Motor::shut()
 {
-    CCRs_setpoint.ccr1 = 1;
-    CCRs_setpoint.ccr2 = 1;
-    CCRs_setpoint.ccr3 = 1;
+    CCRs_setpoint.ccr1 = 0.5;
+    CCRs_setpoint.ccr2 = 0.5;
+    CCRs_setpoint.ccr3 = 0.5;
 }
 void Motor::measurePhasePhaseVel()
 {
@@ -294,7 +281,7 @@ void Motor::measurePhasePhaseVel()
     pos_circular+= wrap_pm((pos_cpr_counts_ - pos_cpr_counts_last_)/(float(e_config_.cpr)),1.0f);
     pos_circular_=pos_circular;
 
-    int32_t corrected_enc = count_in_cpr_ ;
+    int32_t corrected_enc = count_in_cpr_;
     if (snap_to_zero_vel || !e_config_.enable_phase_interpolation) {
         interpolation_ = 0.5f;
     } else if (delta_enc > 0) {
@@ -306,6 +293,7 @@ void Motor::measurePhasePhaseVel()
         if (interpolation_ > 1.0f) interpolation_ = 1.0f;
         if (interpolation_ < 0.0f) interpolation_ = 0.0f;
     }
+
     float interpolated_enc = corrected_enc + interpolation_;
 
     float elec_rad_per_enc = m_config_.pole_pairs * 2 * M_PI * (1.0f / (float)(e_config_.cpr));
@@ -387,7 +375,10 @@ void Motor::get_alpha_beta_output(uint32_t timestamp, Motor::float2D *mod_alpha_
     float Ialpha = I_alpha_beta_.first;
     float Ibeta  = I_alpha_beta_.second;
 
-    float I_phase = phase_ + phase_vel_ * (float)(timestamp - current_last_timestamp) * current_meas_period;
+    float I_phase;
+//    if(timestamp > 100000000) I_phase = phase_observer_ + phase_vel_ * (float)(timestamp - current_last_timestamp) * current_meas_period;
+//    else
+    I_phase = phase_ + phase_vel_ * (float)(timestamp - current_last_timestamp) * current_meas_period;
     float c_I = cosf(I_phase);
     float s_I = sinf(I_phase);
 
@@ -439,6 +430,7 @@ void Motor::update_current_controller_gains()
 
 void Motor::velovityLoop(uint32_t timestamp)
 {
+
     //限制速度
     vel_setpoint_ = vel_setpoint_ > vel_limit ? vel_limit : vel_setpoint_;
     vel_setpoint_ = vel_setpoint_ <-vel_limit ?-vel_limit : vel_setpoint_;
@@ -458,16 +450,14 @@ void Motor::velovityLoop(uint32_t timestamp)
     }
 
     v_err = vel_setpoint_ - vel_estimate_;
-    torque = (vel_gain_ * gain_scheduling_multiplier)*v_err;
+    torque += (vel_gain_ * gain_scheduling_multiplier)*v_err;
     torque += vel_integrator_torque_;
 
 
     //限制力矩
     bool limit = false;
-
-    torque = torque < -torque_limit_ ? -torque_limit_ : torque;
-    torque = torque > torque_limit_  ? torque_limit_ : torque;
-
+    torque = torque > torque_limit_ ? torque_limit_ : torque;
+    torque = torque <-torque_limit_ ?-torque_limit_ : torque;
     if(torque == torque_limit_ || torque == -torque_limit_) limit = true;
 
     if(limit) vel_integrator_torque_*=0.99f;
@@ -482,26 +472,25 @@ void Motor::velovityLoop(uint32_t timestamp)
 }
 
 void Motor::positionLoop(uint32_t timestamp){
-    static uint32_t last_time_stamp_ = 0;
 
-    if(a_config_.calib_anticogging){
-        if (std::abs(pos_err) <= a_config_.calib_pos_threshold / (float)e_config_.cpr &&std::abs(vel_estimate_) < a_config_.calib_vel_threshold / (float)e_config_.cpr) {
-            if(a_config_.index < 360)a_config_.cogging_map[a_config_.index++] = vel_integrator_torque_;
-        }
-
-        if (a_config_.index < 360) {
-            pos_setpoint = a_config_.index * getCoggingRatio();
-            vel_setpoint_ = 0.0f;
-            torque_setpoint_ = 0.0f;
-        } else {
-            a_config_.index = 0;
-            pos_setpoint = 0.0f;  // Send the motor home
-            vel_setpoint_ = 0.0f;
-            torque_setpoint_ = 0.0f;
-            anticogging_valid_ = true;
-            a_config_.calib_anticogging = false;
-        }
-    }
+//    if(a_config_.calib_anticogging){
+//        if (std::abs(pos_err) <= a_config_.calib_pos_threshold / (float)e_config_.cpr &&std::abs(vel_estimate_) < a_config_.calib_vel_threshold / (float)e_config_.cpr) {
+//            if(a_config_.index < 360)a_config_.cogging_map[a_config_.index++] = vel_integrator_torque_;
+//        }
+//
+//        if (a_config_.index < 360) {
+//            pos_setpoint = a_config_.index * getCoggingRatio();
+//            vel_setpoint_ = 0.0f;
+//            torque_setpoint_ = 0.0f;
+//        } else {
+//            a_config_.index = 0;
+//            pos_setpoint = 0.0f;  // Send the motor home
+//            vel_setpoint_ = 0.0f;
+//            torque_setpoint_ = 0.0f;
+//            anticogging_valid_ = true;
+//            a_config_.calib_anticogging = false;
+//        }
+//    }
 
     //限制速度
     vel_setpoint_ = vel_setpoint_ > vel_limit ? vel_limit : vel_setpoint_;
@@ -521,13 +510,10 @@ void Motor::positionLoop(uint32_t timestamp){
 
     float torque = torque_setpoint_;
 
-    if(anticogging_valid_ && a_config_.anticogging_enabled){
-        ctrlMode = ControlMode::CTRL_VEL;
-        ctrlMode = ControlMode::CTRL_VEL;
-        ctrlMode = ControlMode::CTRL_VEL;
-        float anticogging_pos = pos_circular_ / getCoggingRatio();
-        torque += a_config_.cogging_map[mod((int)anticogging_pos, 360)];
-    }
+//    if(anticogging_valid_ && a_config_.anticogging_enabled){
+//        float anticogging_pos = pos_circular_ / getCoggingRatio();
+//        torque += a_config_.cogging_map[mod((int)anticogging_pos, 360)];
+//    }
 
     float v_err   =  vel_des - vel_estimate_;
     torque += (vel_gain_ * gain_scheduling_multiplier) * v_err;
@@ -537,17 +523,18 @@ void Motor::positionLoop(uint32_t timestamp){
     bool limit = false;
     torque = torque > torque_limit_ ? torque_limit_ : torque;
     torque = torque <-torque_limit_ ?-torque_limit_ : torque;
+
     if(torque == torque_limit_ || torque == -torque_limit_) limit = true;
 
     if(limit) vel_integrator_torque_*=0.99f;
-    else      vel_integrator_torque_+=((vel_integrator_gain_*gain_scheduling_multiplier)*current_meas_period*(timestamp - last_time_stamp_))*v_err;
+    else      vel_integrator_torque_+=((vel_integrator_gain_*gain_scheduling_multiplier)*current_meas_period*(1/*timestamp - pos_last_time_stamp_*/))*v_err;
 
     vel_integrator_torque_ = vel_integrator_torque_ > vel_integrator_limit_ ? vel_integrator_limit_ : vel_integrator_torque_;
     vel_integrator_torque_ = vel_integrator_torque_ <-vel_integrator_limit_ ?-vel_integrator_limit_ : vel_integrator_torque_;
 
     torque_setpoint_src = torque;
 
-    last_time_stamp_ = timestamp;
+//    pos_last_time_stamp_ = timestamp;
 }
 void Motor::go_zero() {
 
@@ -567,58 +554,7 @@ void Motor::go_zero() {
     SVM(alpha,beta,&CCRs_setpoint);
 }
 
-
-void Motor::Set_RGB_Breath_Rate(uint8_t rate,uint8_t color)
-{
-#define CNT 1000
-    static uint16_t cnt[3]     = {0,0,0};
-    static uint8_t  reverse[3] = {0,0,0};
-
-    switch (color) {
-        case 1:{
-            if(!reverse[0]) cnt[0]+=rate;
-            else            cnt[0]-=rate;
-
-            if(cnt[0] >= CNT){
-                cnt[0]     = CNT;
-                reverse[0] = 1;
-            }else if(cnt[0] <= 0){
-                cnt[0]     = 0;
-                reverse[0] = 0;
-            }
-        }break;
-
-        case 2:{
-            if(!reverse[1]) cnt[1]+=rate;
-            else            cnt[1]-=rate;
-
-            if(cnt[1] >= CNT){
-                cnt[1]     = CNT;
-                reverse[1] = 1;
-            }else if(cnt[1] <= 0){
-                cnt[1]     = 0;
-                reverse[1] = 0;
-            }
-        }break;
-
-        case 3:{
-            if(!reverse[2]) cnt[2]+=rate;
-            else            cnt[2]-=rate;
-
-            if(cnt[2] >= CNT){
-                cnt[2]     = CNT;
-                reverse[2] = 1;
-            }else if(cnt[2] <= 0){
-                cnt[2]     = 0;
-                reverse[2] = 0;
-            }
-        }break;
-        default:{
-
-        }break;
-    }
-    RGB_R(cnt[0]);
-    RGB_G(cnt[1]);
-    RGB_B(cnt[2]);
+void Motor::observer_update(uint32_t timestamp) {
+    float R = this->resistance;
+    float L = this->inductance;
 }
-

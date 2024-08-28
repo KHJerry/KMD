@@ -2,10 +2,13 @@
 #define __MOTOR_HPP
 
 #define TPWM                   144000000.0f / 25000.0f / 2.0f
+#define sqrt3                  1.73205080756F
 #define one_by_sqrt3           0.57735026919F
 #define two_by_sqrt3           1.15470053838F
 #define sqrt3_by_2             0.86602540378F
 #define current_meas_period    (0.00004f*2.f)
+#define W                       5.14f
+#define H                       5.31f
 
 #define ABS(X) (X) < 0 ? -(X) : (X)
 
@@ -31,6 +34,13 @@ public:
     enum RunState{STATE_NONE=0,STATE_ZERO,STATE_RESISTANCE_CALIBRATION,STATE_INDUCTANCE_CALIBRATION,STATE_ENCODER_CALIBRATION,STATE_CLOSELOOP};
     enum ControlMode{CTRL_VEL=0,CTRL_POS};
     enum RGBStatus{Blue,Green,Red,BlueGreen,BlueRed,GreenRed,BlueGreenRed,NONE};
+
+    struct observer_state{
+        float x1,x2;
+        float lambda_est;
+        float i_alpha_last;
+        float i_beta_last;
+    };
 
     struct Anticogging_t {//23 Bytes
         uint32_t index                = 0;
@@ -114,6 +124,7 @@ public:
     void get_alpha_beta_output(uint32_t timestamp,float2D* mod_alpha_beta);
     void velovityLoop(uint32_t timestamp);
     void positionLoop(uint32_t timestamp);
+    void observer_update(uint32_t timestamp);
     static void Set_RGB_Breath_Rate(uint8_t rate,uint8_t color);
 
 
@@ -228,7 +239,7 @@ public:
         return;
     }
     void Clark(Iph_ABC_t currents,float2D &Ialpha_beta){
-        Ialpha_beta = {currents.phA,one_by_sqrt3*(currents.phB - currents.phC)};
+        Ialpha_beta = {(currents.phA - (currents.phB+currents.phC) / 2) * (2.f/3.f),(sqrt3/2.f*(currents.phB - currents.phC)) * (2.f / 3.f)};
     }
     int mod(const int dividend, const int divisor){
         int r = dividend % divisor;
@@ -290,6 +301,8 @@ public:
 
     //Encoder Parameters
     float phase_                = 0.0f;
+    float phase_observer_       = 0.0f;
+    float phase_observer_last   = 0.0f;
     float phase_vel_            = 0.0f;
     int32_t shadow_count_       = 0;
     int32_t count_in_cpr_       = 0;
@@ -305,6 +318,7 @@ public:
     float interpolation_        = 0.0f;
     uint32_t encoder_last_time_stamp_ = 0;
     float p = 0;
+    bool enable_oberver         = false;
 
     //MeasureResistance Parameters
     const float kI              = 1.0f;
@@ -354,18 +368,23 @@ public:
     float Ierr_d,Ierr_q;
 
     //Velocity Controller
-    float vel_limit             = 20.0f;
+    float vel_limit             = 50.0f;
     float vel_setpoint_         = 0.f;
     float vel_gain_             = 0.95f/2;
     float vel_integrator_gain_  = vel_gain_*5;
+
+    float vel_integrator_torque1_= 0.0f;
+    float vel_integrator_torque2_= 0.0f;
     float vel_integrator_torque_= 0.0f;
-    float vel_integrator_limit_ = 10.0f;
+
+    float vel_integrator_limit_ = 10000.0f;
     uint32_t velocity_last_time_stamp_ = 0;
 
     //Position Controller
     float pos_setpoint = 0.f;
     float pos_gain = 25.f;
     float pos_err;
+    uint32_t pos_last_time_stamp_ = 0;
 
     //Torque Controller
     float torque_limit_    = 3.0F;//Nm
@@ -381,6 +400,9 @@ public:
     uint8_t RGB_ccr[3] = {0,0,0};
     uint8_t RGB_status = NONE;
 
+    //Observer
+    struct observer_state observer;
+
     //ControlMode
     ControlMode ctrlMode = ControlMode::CTRL_POS;
 
@@ -388,7 +410,7 @@ public:
     uint16_t ref_value[3];
 };
 
-extern Motor motor1,motor2;
+extern Motor motor;
 extern Motor::RunState SelectState;
 extern float vofa_float[];
 extern uint8_t vofa_data[];

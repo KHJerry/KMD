@@ -25,15 +25,9 @@ int main(void)
 
     //GPIO Init
     MY_GPIO_Init();
-
     MY_TIM1_Init();
-    MY_TIM8_Init();
-    MY_TIM2_Init();
     MY_TIM3_Init();
-    MY_TIM4_Init();
-
     MY_ADC_Init();
-
     MY_CAN_Init();
 
     app_main();

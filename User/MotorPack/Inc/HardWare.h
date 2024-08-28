@@ -14,15 +14,8 @@ extern uint16_t ADC_Buff[2];
 
 /**MCU‘s IO Configure**/
 //Defines About LED And RGB
-#define EN_GATE(X) X == 1 ? GPIO_SetBits(GPIOE,GPIO_Pin_2)  : GPIO_ResetBits(GPIOE,GPIO_Pin_2)
-#define LED_R(X)   X == 0 ? GPIO_SetBits(GPIOE,GPIO_Pin_3)  : GPIO_ResetBits(GPIOE,GPIO_Pin_3)
-#define LED_G(X)   X == 0 ? GPIO_SetBits(GPIOE,GPIO_Pin_4)  : GPIO_ResetBits(GPIOE,GPIO_Pin_4)
-#define LED_B(X)   X == 0 ? GPIO_SetBits(GPIOE,GPIO_Pin_5)  : GPIO_ResetBits(GPIOE,GPIO_Pin_5)
-#define M1_BK(X)   X == 0 ? GPIO_SetBits(GPIOB,GPIO_Pin_10) : GPIO_ResetBits(GPIOB,GPIO_Pin_10)
-#define M2_BK(X)   X == 1 ? GPIO_SetBits(GPIOC,GPIO_Pin_4)  : GPIO_ResetBits(GPIOC,GPIO_Pin_4)
-#define RGB_G(X)   TIM4->CH1CVR = X
-#define RGB_R(X)   TIM4->CH2CVR = X
-#define RGB_B(X)   TIM4->CH3CVR = X
+#define EN_GATE(X) X == 1 ? GPIO_SetBits(GPIOC,GPIO_Pin_9)  : GPIO_ResetBits(GPIOC,GPIO_Pin_9)
+#define LED(X)     X == 1 ? GPIO_SetBits(GPIOA,GPIO_Pin_4)  : GPIO_ResetBits(GPIOA,GPIO_Pin_4)
 
 
 void MY_GPIO_Init(void);
@@ -39,4 +32,6 @@ void MY_TIM4_Init(void);    //RGB PWM Output
 void MY_ADC_Init(void);
 
 void MY_CAN_Init(void);
+void Uart_Init(void);
+void USARTx_SendByte(USART_TypeDef* pUSARTx, uint8_t data);
 uint8_t CAN_Send_Msg(uint32_t id,uint8_t *msg);
